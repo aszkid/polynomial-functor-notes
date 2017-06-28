@@ -1,0 +1,154 @@
+% !TEX root=main.tex
+
+\pagebreak
+\section{Day 9}
+
+\subsection{Last comments on Gaussian elimination}
+
+Recall that for a given system of $m$ linear equations in $n$ variables, we have that
+\begin{align*}
+  \rank(A) + \nullity(A) = n
+\end{align*}
+with $\rank(A)=$ \# of pivots, and $\nullity(A)=$ \# of free variables.
+
+\begin{question}
+  Given $\{a_1,\cdots,a_n\}\subset\bbR^m$, how can we determine if they are linearly independent?
+\end{question}
+\begin{answer}
+  Form the matrix with standard basis representation of each vector as a column. We get that
+  \begin{align*}
+    \{a_1,\cdots,a_n\} \text{ is linearly independent} &\Longleftrightarrow x_1a_1 + \cdots + x_na_n = 0 \text{ implies } x_i=0\\
+    &\Longleftrightarrow Ax=0 \text{ only has trivial solution } x=0\\
+    &\Longleftrightarrow n(A)=\{0\}\\
+    &\Longleftrightarrow \rank(A)=\text{\# cols}=n \text{, impossible if $n>m$!}
+  \end{align*}
+\end{answer}
+
+
+
+\subsection{Matrix inversion}
+
+blah...
+
+
+\subsection{Inner products and Orthogonality -- intro}
+
+\begin{definition}
+  For $v,w\in\bbR^n$, the \emph{dot product} $v\cdot w$ is defined as
+  \begin{align*}
+    v\cdot w = \sum_{i=1}^n v_iw_i.
+  \end{align*}
+
+  Roughly speaking, this tells how close $v$ and $w$ are to pointing in the same direction.
+\end{definition}
+
+\begin{definition}
+  Two vectors $v$ and $w$ are \emph{orthogonal} (or \emph{perpendicular}) if $v\cdot w = 0$.
+\end{definition}
+
+
+\begin{question}
+  Why is orthogonality useful?
+\end{question}
+\begin{answer}
+  \begin{enumerate}[(a)]
+    \item \emph{Orthogonal bases are nicer than others;} consider
+    \begin{align*}
+      e_i\cdot v &= v_1 e_i \cdot e_1 + \cdots + v_n e_i \cdot e_n\\
+      &= v_i e_i\cdot e_i = v_i.
+    \end{align*}
+
+    \item \emph{The closest point $w$ on a subspace $S$ to a given $v\notin S$ can be found when $v-w$ is orthogonal to $S$.}
+
+    \item \emph{$Ax=b$ might have no solutions, but we can find the `closest' by using orthogonal vectors n' shit.}
+
+    \item \emph{Help determine the solvability of linear systems.}
+  \end{enumerate}
+\end{answer}
+
+
+\begin{definition}
+  A \emph{real inner product space} is a vector space $V$ equipped with a function $\inp{\cdot}{\cdot}:V\times V\to\bbR$ with
+  \begin{enumerate}[(1)]
+    \item\emph{Bilinearity:}
+    \begin{align*}
+      \inp{u+v}{w} &= \inp{u}{w} + \inp{v}{w}\\
+      \inp{u}{v+w} &= \inp{u}{v} + \inp{u}{w}\\
+      \inp{\alpha u}{v} &= \alpha\inp{u}{v}.
+    \end{align*}
+    \item\emph{Symmetry:} $\inp{u}{v} = \inp{v}{u}$.
+    \item\emph{Positive-definiteness:} $\inp{u}{v}\geq 0$ and $\inp{u}{v}=0$ only if $u=v$.
+  \end{enumerate}
+\end{definition}
+
+We show a few examples;
+\begin{enumerate}[(A)]
+  \item With $V=\bbR^n$, let $\inp{u}{v}=u\cdot v$.
+  \item With $V=C([0,1])$, let $\inp{f}{g} = \int_0^1 f(t)g(t)dt$
+
+  \emph{(Positive-definiteness is the hardest to prove in this case).}
+
+  \item With $V=D([0,1])$, let $\inp{f}{g} = \int_0^1 [f(t)g(t) + f'(t)g'(t)]dt$.
+\end{enumerate}
+
+
+And we now consider the complex case. For that, we need a few definitions:
+\begin{definition}
+  Given $z=x+iy\in\bbC$, the \emph{complex conjugate} of $z$ is defined by $\overline{z} = x-iy$
+
+  and the \emph{complex magnitude} (or \emph{modulus}) of $z$ is $|z|=\sqrt{z\overline{z}}$.
+\end{definition}
+
+\emph{Remark;} note that $\overline{\overline{z}}=z$ and $\overline{z_1z_2}=\overline{z_1}\cdot\overline{z_2}$.
+
+\begin{definition}
+  A \emph{complex inner product space} is a complex vectors space equipped with a function $\inp{\cdot}{\cdot}:V\times V\to\bbC$ with
+  \begin{enumerate}[(1)]
+    \item\emph{Linearity in 1st argument:}
+    \begin{align*}
+      \inp{u+v}{w} &= \inp{u}{w} + \inp{v}{w}\\
+      \inp{\alpha u}{v} &= \alpha\inp{u}{v}.
+    \end{align*}
+    \item\emph{Conjugate symmetry:} $\inp{u}{v} = \overline{\inp{v}{u}}$.
+    \item\emph{Positive definiteness:} $\inp{u}{u}\in\bbR$, $\inp{u}{v}\geq 0$ and $\inp{u}{u}=0$ only if $u=0$.
+  \end{enumerate}
+\end{definition}
+
+\emph{Remark;} note that (1)+(2) implies $\inp{u}{\alpha v} = \overline{\inp{\alpha v}{u}}=\overline{\alpha}\inp{u}{v}$.
+
+And we show a few more examples;
+\begin{enumerate}[(A)]
+  \item With $V=\bbC^n$, let $\inp{v}{w}=v_1\overline{w_1} + \cdots + v_n\overline{w_n}$.
+  \item With $V=C([0,1],\bbC)$, let $\inp{f}{g}=\int_0^1 f(t)\overline{g(t)}dt$.
+\end{enumerate}
+
+
+\subsection{Norm}
+
+
+\begin{definition}
+  For a real or complex inner product space $V$ we define the \emph{norm} (or \emph{length}) of a vector $v\in V$ as a function $\norm{\cdot}:V\to\bbR$ or $\to\bbC$ by
+  \begin{align*}
+    \norm{v} = \sqrt{\inp{v}{v}} (*)
+  \end{align*}
+\end{definition}
+
+\emph{Remark (*);} the complex inner product space requires conjugate symmetry for the square root to make sense. ***
+
+
+We see that all inner product spaces are naturally endowed with a norm. However, not all normed spaces have an inner product!
+
+\emph{Remark 2;} some properties of the norm.
+
+\begin{theorem}[Cauchy-Schwarz]
+  For an inner product space $V$ and $v,w\in V$ we have that
+  \begin{align*}
+    |\inp{u}{v}| \leq \norm{u}\cdot\norm{v}
+  \end{align*}
+\end{theorem}
+\begin{proof}
+  First we deal with the case where $\norm{u}=\norm{v}=1$. Consider the following:
+  \begin{align*}
+    \inp{u-v}{u-v} = \inp{u}{u} + \inp{v}{v} + 2\inp{u}{v}
+  \end{align*}
+\end{proof}

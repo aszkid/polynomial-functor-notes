@@ -1,0 +1,106 @@
+% !TEX root=main.tex
+
+\pagebreak
+\section{Day 4}
+
+\subsection{Linear transformations}
+\emph{Remark;} if $V$ is finite-dimensional, we can write every vector with respect to some finite basis $v=v_1 e_1 + \cdots + v_n e_n$, so every vector can be represented by the column vector $v=(v_1,\cdots,v_n)\in\bbF^n$. So there is a natural bijection between $V$ and $\bbF^n$.
+
+\begin{definition}
+  A function $f:X\to Y$ is injective if...
+\end{definition}
+\begin{definition}
+  A function $f:X\to Y$ is surjective if...
+\end{definition}
+\begin{definition}
+  A function $f:X\to Y$ is bijective if...
+\end{definition}
+
+We say that two sets have the same cardinality if they are bijective.
+
+For bijective functions, we define:
+\begin{definition}
+  The inverse function $f\inv:Y\to X$ is defined as $f(x)=y$ iff $f\inv(y)=x$.
+\end{definition}
+
+\begin{definition}
+  For vector spaces $V,W$ over a field $\bbF$, a \emph{linear transformation} is a function $T:V\to W$ such that
+  \begin{enumerate}[(1)]
+    \item $T(v_1+v_2)=T(v_1)+T(v_2)$.
+    \item $T(\alpha v) = \alpha T(v)$.
+  \end{enumerate}
+\end{definition}
+
+Some examples;
+\begin{enumerate}[{Ex. }A)]
+  \item \emph{Identity transformation:} $I_V:V\to V$ with $I_V(v)=v$.
+  \item \emph{Scalar multiple:} For $V=W=\bbR$, let $T_\alpha:\bbR\to\bbR$ be $T_\alpha(r)=\alpha r$.
+
+  In fact, any linear transformation $\bbR\to\bbR$ is of this form. For any linear transformation $T:\bbR\to\bbR$, let $\alpha=T(1)$. We have that $T(x)=T(x\cdot 1) = x T(1)=\alpha x$.
+
+  \item \emph{Linear transformations on $\bbR^2$:}
+  \begin{itemize}
+    \item \emph{Rotations:} let $R_\theta:\bbR^2\to\bbR^2$ be rotation by $\theta$ radians around the origin, for $\theta\in[0,2\pi)$. Proof by picture that $R_\theta$ is linear.
+
+    \item \emph{Reflections:} let $T_0:\bbR^2\to\bbR^2$ be reflection across the horizontal axis, so $T_0(v)=(v_1,-v_2)$. If $l$ is any line through the origin, define $T_l:\bbR^2\to\bbR^2$ to be reflection across $l$. Note that $T_l(v)=(R_\theta\circ T_0)(v)$ for $\theta=\arctan(l_2/l_1)$.
+
+    Important; $R_\theta T_0v \neq T_0 R_\theta v$! Linear transformations, in general, do not commute. We will show that compositions of linear transformations are again linear transformations.
+
+    \item \emph{Projections:} let $P_0:\bbR^2\to\bbR^2$ be projection to the horizontal axis, so $P_0(v)=(v_1,0)$. Again, given any line $l$ through the origin, we define $P_l:\bbR^2\to\bbR^2$ to be projection to $l$, and find that it can be written as $P_l(v)=(R_\theta\circ P_0)(v)$ for $\theta=\arctan(l_2/l_1)$.
+
+    \item \emph{Expansions/contractions:} transformations that stretch a vector in any given direction. It can be written as a composition of $R_\theta$ with stretching on the $x$ and $y$ axes.
+  \end{itemize}
+
+  \item With $V=\calF(\bbR)$ and $\bbR$ as the underlying field, let $\delta_x(f)=f(x)$; a transformation which evaluates a given function at a fixed point. It is easy to check that $\delta_x$ is linear. This is the `Dirac delta function' in disguise (why?).
+
+  \item With $V=\{$ integrable functions on $[0,1]\}$ and $\bbR$ as the underlying field, the transformation $T:V\to\bbR$ given by $T(f)=\int_0^1 f(x)dx$ is a linear transformation by the usual integral rules.
+\end{enumerate}
+
+We see that linear transformations carry themselves structure. To make the notion more concrete:
+
+\begin{definition}
+  $L(V,W)=\{$all linear transformations $V\to W\}$.
+\end{definition}
+\begin{theorem}
+  $L(V,W)$ is a vector space over the underlying field $\bbF$, with addition $(T_1+T_2)(v)=T_1(v)+T_2(v)$ and scalar multiplication $(\alpha T)(v)=\alpha T(v)$.
+\end{theorem}
+\begin{proof}
+  The vector space axioms are easy to check by linearity of $T$ and by virtue of $V$ and $W$ being vector spaces themselves.
+\end{proof}
+
+
+There is yet another operation that enriches the structure of spaces of transformations; \emph{composition}. Given any pair of transformations $T_1\in L(U,V)$ and $T_2\in L(V,W)$, define $T_2 T_1\in L(U,W)$ as $(T_2 T_1)(u) = T_2(T_1(u))=(T_2\circ T_1)(u)$.
+
+Note that the opposite transformation $T_1 T_2$ may not make sense, because it implies a map $V\to W\to U$.
+
+\begin{proposition}
+  $T_2T_1$ is a linear transformation $U\to W$.
+\end{proposition}
+\begin{proof}
+  Easy to show.
+\end{proof}
+
+Also note that composition of transformations is associative; this is a very rich set.
+
+\subsection{Inverse transformations}
+
+\begin{theorem}\label{thm:bijimpinv}
+  If a linear transformation $T\in L(V,W)$ is bijective, then $T\inv$ is well-defined and linear, with $T\inv\in L(W,V)$.
+\end{theorem}
+
+For a counterexample, projection on the $x$-axis does not have an inverse, since $(1,0)$,$(1,1)$,$(1,2)$... all map to $(1,0)$.
+
+\begin{proof}
+  Assume $T$ is invertible, so that $T\inv$ is uniquely defined. Hence $T(u)=w$ iff $T\inv(w)=u$. Pick $w_1,w_2\in W$ and let $v_1=T\inv(w_1)$ and $v_2=T\inv(w_2)$. Then $T(v_1)=w_1$ and $T(v_2)=w_2$. Since $T$ is linear, $T(v_1+v_2)=T(v_1)+T(v_2)=w_1+w_2$; apply $T\inv$ on both sides to get $v_1+v_2=T\inv(w_1+w_2)$, so $T\inv(w_1+w_2)=T\inv(w_1)+T\inv(w_2)$ as desired.
+
+  Easy to show scalar multiplication is linear on $T\inv$.
+\end{proof}
+
+\emph{Remark;} $TT\inv=I_V$.
+
+
+\begin{definition}
+  A bijective linear transformation $T:V\to W$ is called a \emph{vector space isomorphism}.
+\end{definition}
+
+Two vector spaces which are isomorphic can be considered to be `the same' up to relabeling.

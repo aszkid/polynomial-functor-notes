@@ -1,0 +1,45 @@
+% !TEX root=main.tex
+
+\pagebreak
+\section{Day 8}
+
+\subsection{Gaussian elimination}
+
+Valid \emph{row operations} are the following:
+\begin{enumerate}[(1)]
+  \item Exchange rows
+  \item Scale rows
+  \item Add a multiple of one row to another
+\end{enumerate}
+
+A \emph{pivot} is the first non-zero entry in a row of a given matrix.
+
+\begin{definition}
+  We say that a matrix is in \emph{row-echelon} form if each pivot is strictly to the right of the pivot in the previous row.
+\end{definition}
+
+The goal of \emph{Gaussian elimination} is to reduce the given matrix to row-echelon form.
+
+** PROCESS
+
+\begin{lemma}
+  Row operations do not change the rank of a matrix.
+\end{lemma}
+
+\begin{definition}
+  Two matrices $A$ and $B$ are row-equivalent if there exists a finite set of row operations that transform $A$ into $B$ and viceversa.
+\end{definition}
+
+We conclude from Gaussian elimination the following useful characterization:
+\begin{itemize}
+  \item \# pivots $= \rank(A)$.
+  \item \# zero-rows $= \nullity(A)$.
+\end{itemize}
+
+So given any system of $m$ equations with $n$ unknowns, we form an $m\times n$ matrix so that $Ax=b$, and so
+
+\begin{align*}
+  \text{\emph{0 solutions}} &\Longleftrightarrow b\in \text{colspace}(A)\\
+  \text{\emph{1 solution}} &\Longleftrightarrow \rank(A)=n\\
+  \text{\emph{$\infty$ solutions}} &\Longleftrightarrow \nullity(A)=dim Sols??
+\end{align*}

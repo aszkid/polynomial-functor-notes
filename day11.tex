@@ -1,0 +1,159 @@
+% !TEX root=main.tex
+
+\pagebreak
+\section{Day 11}
+
+\subsection{Orthogonal complement}
+
+\begin{definition}
+  With $V$ a finite-dimensional inner product space and $S\subset V$ a subspace, we define its $\emph{orthogonal complement}$
+  \begin{align*}
+    S^\perp = \{v\in V \mid \inp{v}{s} = 0, s\in S\}.
+  \end{align*}
+\end{definition}
+
+
+\emph{Examples;}
+\begin{enumerate}[(A)]
+  \item $V=\bbR^2$ and $S=\{\alpha(1,1) \mid \alpha\in\bbR\} \Longrightarrow S^\perp = \{\beta(-1,1) \mid \beta\in\bbR\}$.
+  \item For a plane in $\bbR^3$, its orthogonal complement is the line defined by its normal vector.
+\end{enumerate}
+
+
+
+\begin{theorem}
+  With $V$ a finite-dimensional inner product space and $S\subset V$ a subspace, any $v\in V$ can be written uniquely as $v = s + u$ for $s\in S$ and $u\in S^\perp$.
+
+  In other words; a subspace and its complement `split' the whole space in a nice way: $V = S \oplus S^\perp$.
+\end{theorem}
+\begin{proof}
+  Fix $v\in V$. Choose an onb $\{e_1,\dots,e_m\}$ for $S$. By \emph{Magic \copyright} we define $w$ as
+  \begin{align*}
+    w = v - \inp{v}{e_1}e_1 - \cdots - \inp{v}{e_m}e_m.
+  \end{align*}
+
+  We check that, in fact, $w\in S^\perp$. Since our basis is orthonormal,
+  $\inp{w}{e_i} = \inp{v}{e_i} -  \inp{v}{e_i}\inp{e_i}{e_i} = 0$, hence for any $s\in S$ we have
+  \begin{align*}
+    \inp{w}{s} &= \inp{w}{\inp{s}{e_1}e_1 + \cdots + \inp{s}{e_m}e_m}\\
+    &= 0 + \cdots + 0 = 0,
+  \end{align*}
+  therefore $w\in S^\perp$.
+
+  Now let $u=v-w=\inp{v}{e_1}e_1 + \cdots + \inp{v}{e_m}e_m$, so $u\in S$. We call $u$ the \emph{orthogonal projection} of $v$ onto $S$, i.e. $u=P_Sv$. This is in fact a linear transformation.
+
+  Therefore, we have $v=u+w$ with $u\in S$ and $w\in S^\perp$.
+
+  Uniqueness is simple; assume $u=u+w=u_1+w_1$ for distinct vectors. Now, $u,u_1\in S$ and $w,w_1\in S^\perp$, so by rearranging the equality we get
+  \begin{align*}
+    u-u_1 = w_1-w.
+  \end{align*}
+
+  Since $u-u_1\in S$ and $w_1-w\in S^\perp$, we claim that this is only possible if $u-u_1=0$ and $w_1-w=0$, i.e. $S\cap S^\perp = \{0\}$.
+
+  If $v\in S\cap S^\perp$, then $\inp{v}{w}=0$ for all $w\in S$, so in particular $\inp{v}{v}=0$ which is only possible if $v=0$.
+
+  We conclude that $u=u_1$ and $w=w_1$, so our sum decomposition is unique. Intuitively; given a subspace, every vector in our space can be constructed from a vector in the subspace and a vector orthogonal to the subspace. For example, a plane in $\bbR^3$ has the span of its normal vector as its orthogonal complement. Given any vector in $\bbR^3$, we can position ourselves right below this point, on the plane (in fact, this is given by $P_Sv$) and then add a scaling of the normal vector.
+
+\end{proof}
+
+
+\emph{Remark;} $S^\perp=\{0\}$ iff $S=V$.
+
+
+
+\subsection{Adjoints}
+
+\begin{theorem}
+  Let $V,W$ be finite-dimensional inner product spaces. Given $T\in L(V,W)$, there exists a unique $T^*\in L(W,V)$ such that
+  \begin{align*}
+    \inp{Tv}{w}_W = \inp{v}{T^*w}_V
+  \end{align*}
+  for pairs $v\in V$ and $w\in W$. This linear transformation $T^*$ is called the \emph{adjoint} of $T$.
+\end{theorem}
+\begin{proof}
+  \begin{enumerate}[{Step} 1)]
+    \item For each $w\in W$, we claim that there exists a unique $z\in V$ such that $\inp{Tv}{w}=\inp{v}{z}$. (This is the vector we want $T^*w$ to be!).
+
+    Let $\{e_1,\dots,e_n\}$ be an orthonormal basis for $V$. Then
+    \begin{align*}
+      \inp{Tv}{w} &= \inp{\inp{v}{e_1}Te_1 + \cdots + \inp{v}{e_n}Te_n}{w}\\
+      &= \inp{v}{e_1}\inp{Te_1}{w} + \cdots + \inp{v}{e_n}\inp{Te_n}{w}\\
+      &= \inp{v}{\overline{\inp{Te_1}{w}}e_1} + \cdots + \inp{v}{\overline{\inp{Te_n}{w}}e_n}\\
+      &= \inp{v}{\overline{\inp{Te_1}{w}}e_1 + \cdots + \overline{\inp{Te_n}{w}}e_n}\\
+      &= \inp{v}{z},
+    \end{align*}
+
+    for $z=\overline{\inp{Te_1}{w}}e_1 + \cdots + \overline{\inp{Te_n}{w}}e_n$.
+
+    \item Such a $z$ is unique. Assume there exist distinct $z_1$ and $z_2$ such that $\inp{v}{z_1}=\inp{v}{z_2}$; then $\inp{v}{z_1-z_2}=0$ (notice that this is for all $v\in V$), so $z_1-z_2=0$ and thus $z_1=z_2$.
+
+    \item Denote the map $w \longmapsto z=\overline{\inp{Te_1}{w}}e_1 + \cdots + \overline{\inp{Te_n}{w}}e_n$. (Notice again how this does \emph{not} depend on $v$!) by $T^*:W\to V$.
+
+    \item $T^*$ is linear. First, for any $w_1,w_2\in W$ we have
+    \begin{align*}
+      T^*(w_1+w_2) &= \overline{\inp{Te_1}{w_1+w_2}}e_1 + \cdots + \overline{\inp{Te_n}{w_1+w_2}}e_n\\
+      &= (\overline{\inp{Te_1}{w_1}}+\overline{\inp{Te_1}{w_2}})e_1 + \cdots + (\overline{\inp{Te_n}{w_1}}+\overline{\inp{Te_n}{w_2}})e_n\\
+      &= (\overline{\inp{Te_1}{w_1}}e_1+\cdots+\overline{\inp{Te_n}{w_1}})e_n) + (\overline{\inp{Te_1}{w_2}}e_1+\cdots+\overline{\inp{Te_n}{w_2}})e_n)\\
+      &= T^*(w_1) + T^*(w_2).
+    \end{align*}
+
+    Finally, given any $w\in W$ and $\alpha\in\bbF$,
+    \begin{align*}
+      T^*(\alpha w) &= \overline{\inp{Te_1}{\alpha w}}e_1 + \cdots \overline{\inp{Te_n}{\alpha w}}e_n\\
+      &= \overline{\overline{\alpha} \inp{Te_1}{w}}e_1 + \cdots \overline{\overline{\alpha} \inp{Te_n}{w}}e_n\\
+      &= \alpha\overline{\inp{Te_1}{w}} + \cdots + \alpha\overline{\inp{Te_n}{w}}\\
+      &= \alpha T^*(w).
+    \end{align*}
+  \end{enumerate}
+\end{proof}
+
+
+\begin{definition}
+  Given $T\in L(V,V)$, if $T^*=T$ we say that $T$ is \emph{self-adjoint}.
+\end{definition}
+
+\begin{question}
+  If $A$ is a matrix representation of $T$ in some onb $\{e_1,\dots,e_n\}$ for $V$ and $\{u_1,\dots,u_m\}$ for $W$, what is the matrix representation of $T^*$?
+\end{question}
+\begin{answer}
+  We have that $A=(Te_1 \cdots Te_n)$ with $Te_j=\inp{Te_j}{u_1}u_1 + \cdots + \inp{Te_j}{u_m}u_m =a_{1j}u_1 + \cdots + a_{mj}u_m$. Note that we also have that $\inp{Te_j}{u_i} = a_{ij}$.
+
+  Let $b_{ij}$ denote the matrix elements of $T^*$. We have
+  \begin{align*}
+    \inp{e_j}{T^*u_i} &= \overline{\inp{T^*u_i}{e_j}} = \overline{b_{ji}}
+  \end{align*}
+
+  by the same analysis. Now, by the main property of adjoints, we have
+  \begin{align*}
+    a_{ij} &= \inp{Te_j}{u_i}\\
+    &= \inp{e_j}{T^*u_i}\\
+    &= \overline{b_{ji}},
+  \end{align*}
+
+  in other words, $A^*=\overline{A^t}$, and we say that $A^*$ is the \emph{Hermitian conjugate} of matrix of $A$.
+\end{answer}
+
+
+** Some easy examples **
+
+Here follow some properties of adjoint transformations:
+\begin{enumerate}[(1)]
+  \item $(S+T)^*=S^*+T^*$.
+  \item $(\alpha T)^* = \overline{\alpha}T^*$.
+  \item $(T^*)^*=T$.
+  \item $I^*=I$.
+  \item $(ST)^* = T^*S^*$,
+\end{enumerate}
+
+(\emph{copy a few proofs from HW!})
+
+
+
+\begin{theorem}[Geometry of Adjoints]
+  Given $V,W$ finite-dimensional inner product spaces and $T\in L(V,W)$, we have
+  \begin{enumerate}[(a)]
+    \item $n(T^*) = T(V)^\perp$
+    \item $T^*(W) = n(T)^\perp$
+  \end{enumerate}
+\end{theorem}

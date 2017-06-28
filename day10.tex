@@ -1,0 +1,98 @@
+% !TEX root=main.tex
+
+\pagebreak
+\section{Day 10}
+
+\subsection{Analysis}
+
+\begin{theorem}[Triangle Inequality]
+  With $V$ an inner product space and $u,v\in V$, then $\norm{u+v}\leq \norm{u}+\norm{v}$.
+\end{theorem}
+\begin{proof}
+  Square the norm, use bilinearity, etc.
+\end{proof}
+
+This shows that inner product spaces are in fact metric spaces, and so we can do analysis on them! The inner product naturally endows a vector space with a metric given by $d(x,y)=\norm{x-y}$.
+
+Vector spaces > Metric spaces > Normed spaces > Inner Product spaces
+
+\subsection{Orthogonality -- intro}
+
+\begin{definition}
+  For an inner product space $V$, two vectors $u$ and $v$ are \emph{orthogonal} if $\inp{u}{v}=0$.
+
+  More generally, if $u,v\neq0$, we can define the \emph{angle} between them as $\theta=\arccos(\frac{\inp{u}{v}}{\norm{u}\norm{v}})\in[0,\pi]$.
+\end{definition}
+
+\emph{Remark;} note that the fraction is in $[-1,1]$ by Cauchy-Schwarz.
+
+\begin{definition}
+  A vector $v\in V$ is a \emph{unit vector} if $\norm{v}=1$.
+\end{definition}
+\begin{definition}
+  A set $\{u_1,\dots\}\subset V$ is \emph{orthonormal} if
+  \begin{enumerate}[(1)]
+    \item $\norm{u_i}=1$
+    \item $\inp{u_i}{u_j} = 0$ for $i\neq j$
+  \end{enumerate}
+
+  If $\{e_1,\dots,e_n\}$ is a basis for $V$ and it is orthonormal, we say that it is an \emph{orthonormal basis} (onb for short).
+\end{definition}
+
+
+
+\begin{lemma}
+  A (finite) orthonormal set is linearly independent.
+\end{lemma}
+\begin{proof}
+  We have
+  \begin{align*}
+    \lambda_1 u_1 + \cdots + \lambda_n u_n &= 0\\
+    \inp{u_i}{\lambda_1 u_1 + \cdots + \lambda_n u_n} &= \inp{u_i}{0}\\
+    \lambda_i &= 0
+  \end{align*}
+
+  for each $i$, so the set is linearly independent.
+\end{proof}
+
+
+\emph{Remark;} given an orthonormal basis $\{e_i\}$ for $V$, note that we can expand $v\in V$ as
+\begin{align*}
+  v = \sum_{i=1}^n \inp{v}{e_i} e_i.
+\end{align*}
+
+
+\emph{Examples;}
+\begin{enumerate}[(1)]
+  \item In $V=\bbR^n$, the standard basis is orthonormal.
+  \item In $V=C([0,2\pi])$, define the inner product for $f,g\in V$ by
+  \begin{align*}
+    \inp{f}{g} = \frac{1}{\pi}\int_0^{2\pi} f(x)g(x)dx
+  \end{align*}
+
+  \emph{Claim:} the set of functions $f_n(x)=\sin(nx)$ is orthonormal.
+
+  (some integral calculus, and assumptions about our theorems carrying to well-behaved infinite-dimensional vector spaces).
+
+  \emph{Claim:} this set is an orthonormal basis for $D([0,2\pi])$, in the sense that any $f\in D([0,2\pi])$ can be written as
+  \begin{align*}
+    f(x) = \sum_{n=0}^\infty[a_n\cos(nx) + b_n\sin(nx)],
+  \end{align*}
+  (point-wise convergent to $f$).
+
+  We can find coefficients $a_n$ and $b_n$ by taking the inner product with each basis vector: $b_n=\inp{f}{\sin(nx)}$, and similar.
+\end{enumerate}
+
+
+\subsection{Gram-Schmidt Orthogonalization}
+
+\begin{question}
+  Given a set of linearly independent vectors $\{w_1,\dots,w_n\}\subset V$, can we find an orthonormal set with equal span?
+\end{question}
+\begin{answer}
+  \emph{Yes!} This process is called \emph{Gram-Schmidt orthogonalization}.
+\end{answer}
+
+(** understand  [better]  and summarize proof)
+
+So given a linearly independent set, we can automatically find a better-behaved set  of orthonormal vectors which have the same span.

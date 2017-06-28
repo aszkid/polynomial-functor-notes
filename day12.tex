@@ -1,0 +1,197 @@
+% !TEX root=main.tex
+
+\pagebreak
+\section{Day 12}
+
+\subsection{Geometry of Adjoints}
+
+\begin{proof}[Geometry of Adjoints (Proof)]
+  \begin{enumerate}[(a)]
+    \item Let $w\in W$. Then
+    \begin{align*}
+      w\in n(T^*) &\Longleftrightarrow T^*w=0\\
+      &\Longleftrightarrow \inp{v}{T^*w}=\inp{v}{0}=0 &&\text{for all $v\in V$}\\
+      &\Longleftrightarrow \inp{Tv}{w}=0\\
+      &\Longleftrightarrow \inp{z}{w}=0 &&\text{for all $z\in T(V)$}\\
+      &\Longleftrightarrow w\in T(V)^\perp.
+    \end{align*}
+    \item Switch $V$ with $W$ and use part (a) on $T^*$ instead of $T$. Use adjoint properties.
+  \end{enumerate}
+\end{proof}
+
+
+\subsection{Applications to Linear Systems}
+Remember that a linear equation $Ax=b$ is solvable $\Longleftrightarrow$ $b\in\colspace(A)$.
+
+By our previous theorem,
+\begin{align*}
+  \colspace(A) &= A(V)\\
+  &= n(A^*)^\perp,
+\end{align*}
+
+so $A$ is solvable $\Longleftrightarrow b\perp n(A^*)$.
+
+This solvability criteria is useful depending on the type of matrix (sparse, dense, etc).
+
+What about \emph{uniqueness}? \emph{Claim:} if $n(A)=\{0\}$, the solution to $Ax=b$ is unique, i.e. $A^t$ is surjective. Aka, ``row-rank=col-rank''. (***????)
+
+
+Check;
+\begin{align*}
+  \text{RowSpace}(A) &\perp n(A)\\
+  \text{ColSpace}(A) &\perp n(A^t)
+\end{align*}
+
+\subsection{\dots in infinite-dimensional spaces}
+This can be extended to infinitely many dimensions, but we won't do it here (assume it works).
+
+Let $V=C^\infty([0,1])$ and $S=\{f\in V \mid f(0)=f(1)=0\}$. Define the operator $L:C^\infty\to C^\infty$ by
+\begin{align*}
+  L = \frac{d^2}{dx^2} + a\frac{d}{dx},
+\end{align*}
+for any $a\in\bbR$.
+
+\begin{question}
+  Does $Lf=g$ have a solution?
+\end{question}
+\begin{answer}
+  Check the adjoint of $L$; it turns out to be
+  \begin{align*}
+    L^* = \frac{d^2}{dx^2} - a\frac{d}{dx}.
+  \end{align*}
+
+  Now compute its null space, which turns out to be $n(L^*)=\{0\}$. Hence
+  \begin{align*}
+    Lf=g &\Longleftrightarrow f''(x)+af'(x) = g(x) \text{is solvable}\\
+    &\Longleftrightarrow g(x) \perp 0\\
+    &\Longleftrightarrow g\in S,
+  \end{align*}
+
+  in other words, $Lf=g$ is solvable for any $g\in S$!
+
+  (This is a first example on the beauties of functional analysis.)
+\end{answer}
+
+
+
+\subsection{Orthogonal and Unitary linear transformations}
+
+\begin{definition}
+  With $V$ a real inner product space, we say that $T\in L(V)$ is \emph{orthogonal} if $\norm{Tv}=\norm{v}$.
+
+  With $V$ a complex inner product space, we say that $T\in L(V)$ is \emph{unitary} if $\norm{Tv}=\norm{v}$.
+
+  (i.e. $T$ is orthogonal/unitary if it preserves the norm.)
+\end{definition}
+
+\emph{Examples;} reflections and rotations.
+
+
+\begin{theorem}[Characterizations of Orthogonality]
+  With $V$ a finite-dimensional real inner-product space and $T\in L(V)$, the following statements are equivalent:
+  \begin{enumerate}[(1)]
+    \item $T$ is orthogonal
+    \item $\inp{Tu}{Tv}=\inp{u}{v}$ for each pair $u,v\in V$
+    \item $T$ maps an onb of $V$ to an orthonormal set
+    \item The matrix $A$ of $T$ satisfies $A^tA=I$, i.e. $A^t=A\inv$
+  \end{enumerate}
+\end{theorem}
+(\emph{Remark;} (1),(2) implies that ``angles are preserved''.)
+\begin{proof}
+  \begin{itemize}
+    \item (1)$\to$(2). Consider
+    \begin{align*}
+      \norm{Tu}^2 &= \norm{u}^2\\
+      \inp{Tu}{Tu} &= \inp{u}{u} &&\text{now choose any $v\in V$,}\\
+      \inp{T(u+v)}{T(u+v)} &= \inp{u+v}{u+v}\\
+      \inp{Tu}{Tv} &= \inp{u}{v}.
+    \end{align*}
+
+    \item (2)$\to$(3). Let $\{u1,\dots,u_n\}$ be an onb for $V$;
+    \begin{align*}
+      \inp{u_i}{u_j} =
+      \begin{cases*}
+        1 & i=j,\\
+        0 & i\neq j,
+      \end{cases*}
+    \end{align*}
+
+    and since
+    \begin{align*}
+      \inp{Tu_i}{Tu_j} = \inp{u_i}{u_j},
+    \end{align*}
+
+    we get that $\{Tu_1,\dots,Tu_n\}$ is orthonormal.
+
+
+    \item (3)$\to$(1). Given an onb $\{u1,\dots,u_n\}$ for $V$, for any $v\in V$ we have
+    \begin{align*}
+      v &= v_1u_1 + \cdots + v_nu_n,
+    \end{align*}
+
+    so
+    \begin{align*}
+      \norm{Tv}^2 &= \inp{Tv}{Tv}\\
+      &= \inp{v_1Tu_1 + \cdots + v_nTu_n}{v_1Tu_1 + \cdots + v_nTu_n}\\
+      &= v_1^2 + \cdots + v_n^2\\
+      &= \norm{v}^2.
+    \end{align*}
+
+    \item (3)$\to$(4). Given an onb $\{u_1,\dots,u_n\}$ for $V$, we have that $\{Tu_1,\dots,Tu_n\}$ is orthonormal. Consider the matrix $A$ of $T$;
+    \begin{align*}
+      A= \begin{bmatrix}
+        Tu_1 & \cdots & Tu_n
+      \end{bmatrix}
+    \end{align*}
+
+    so that
+    \begin{align*}
+      A^* = \begin{bmatrix}
+        Tu_1\\
+        \cdots\\
+        Tu_n
+    \end{bmatrix}.
+    \end{align*}
+
+    Now compute
+    \begin{align*}
+      A^tA &= I, &&\text{check!!}
+    \end{align*}
+
+    since we only get 1s at diagonal positions, with $(A^tA)_{ii}=\inp{Tu_i}{Tu_i}=1$. By (3), the rest is zero.
+
+    \item (4)$\to$(3). If $A^tA=I$ in a basis $\{u_1,\dots,u_n\}$, this implies that
+    \begin{align*}
+      \inp{Tu_i}{Tu_j} = \begin{cases*}
+        1 & i=j\\
+        0 & i\neq j,
+      \end{cases*}
+    \end{align*}
+    i.e. $\{Tu_1,\dots,Tu_n\}$ is orthonormal.
+
+  \end{itemize}
+\end{proof}
+
+
+This equivalent characterizations motivate the following definition:
+\begin{definition}
+  A matrix $A\in M_{m\times n}(\bbR)$ is \emph{orthogonal} if $A^tA=AA^t=I$.
+
+  A matrix $A\in M_{m\times n}(\bbC)$ is \emph{unitary} if $A^*A=AA^*=I$.
+\end{definition}
+
+
+
+
+\subsection{Determinants -- intro}
+\emph{``Determinants are annoying''} -- Stanley Snelson.
+
+Our approach to determinants is practical; we start by reaching the notion of ``determinant'' in lower dimensions, realizing why is it useful, and lifting the definition to higher dimensions.
+
+
+Given two vectors $v_1,v_2\in\bbR^2$, they determine a parallelogram $P$ given by
+\begin{align*}
+  P = \{t_1v_1 + t_2v_2 \in\bbR^2 \mid t_1,t_2\in[0,1]\}.
+\end{align*}
+
+We claim (and prove) the following; $\area(P)=|ad-bc|$.
