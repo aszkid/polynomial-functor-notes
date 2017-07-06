@@ -1,0 +1,68 @@
+% !TEX root=main.tex
+
+\section{Note 1}
+
+\subsection{First encounter with polynomial functors}
+
+After a quick exposure to the basic concepts of category theory (spread through a long year), we introduce the concept of a \emph{polynomial functor} as a categorification of the usual arithmetic polynomial. We start with the easy one-variable case:
+
+\begin{definition}
+	Given two sets $E,B$ and a function $p:E\to B$, we define the \emph{polynomial functor} $P:\cat{Set}\to\cat{Set}$ as follows:
+    \begin{enumerate}
+    \item For $X\in\cat{Set}$, we have $X \mapsto \sum_{b\in B} X^{Eb}$
+    \item For $f:X\to Y$, we have $f(X) \mapsto \sum_{b\in B} f(X)^{Eb}$
+    \end{enumerate}
+    
+    with $Eb=p\inv\{b\}$ the fibre over $b$.
+\end{definition}
+
+\subsection{Slices and coslices}
+
+When extending the theory of single-variable polynomial functors to the multivariate case, we might consider functors of the form
+\begin{align*}
+	(\cat{Set},\cat{Set},\cat{Set}) &\to \cat{Set}\\
+    (X_1,X_2,X_3) &\mapsto X_1^2X_2 + X_3.
+\end{align*}
+
+This is all good, but there is a nicer way to label variables: \emph{slice categories}. If we are working with a polynomial in three variables, when taking the fibers over each $b$, we would like to specify whether $Eb$ takes us to fibers belonging to $X_1$, $X_2$ or $X_3$. In other words, we want to consider a bigger set $X$ `sliced' in three different parts.
+
+We can achieve exactly that by making an \emph{indexing set} $I=\{1,2,3\}$ and slicing $\cat{Set}$. The resulting category is $(\cat{Set}\downarrow I)$, defined as follows:
+\begin{itemize}
+\item \emph{Objects:} maps $\pi:X\to I$.
+\item \emph{Morphisms:} functions $f:X\to Y$ such that the diagram
+\end{itemize}
+
+\begin{tikzcd}
+X \arrow[dr,"\pi_X"] \arrow[rr,"f"] & & Y \arrow[dl,"\pi_Y"]\\
+& I &
+\end{tikzcd}
+commutes.
+
+In more intuitive terms: we classify the elements in $X$ indexing them to $I$ in all possible ways, through `classifiers' $\pi_X$, and a map between two specific slices $(X,\pi_X)\to(Y,\pi_Y)$ only makes sense in the slice category if the indexing is preserved, by means of the commutative diagram. The elements of the slice category can be thought of as pairs $(X,\pi_X)$, but the function $\pi_X$ already encodes enough information.
+
+And like most things in category theory, we have a dual concept to slices. Intuitively (hopefully); the opposite concept to `classification' is `specification'. Here comes the \emph{coslice category}: given an indexing set $I$, we coslice $\cat{Set}$ and get $(I\downarrow\cat{Set})$, defined as follows:
+\begin{itemize}
+\item \emph{Objects:} maps $\pi:I\to X$.
+\item \emph{Morphisms:} functions $f:X\to Y$ such that the diagram
+\end{itemize}
+
+\begin{tikzcd}
+& I \arrow[dl,"\pi_X"] \arrow[dr,"\pi_Y"] &\\
+X \arrow[rr,"f"] & & Y
+\end{tikzcd}
+commutes.
+
+(explain `specifier' intuition ...)
+
+\subsection{Pullbacks}
+The characteristic function $p:E\to B$ (in the sense that it defines our polynomial) induces a functor $p^*:(\catSet\downarrow B)\to(\catSet\downarrow E)$ sending maps $f:Y\to B$ to the pullback
+
+\begin{tikzcd}
+Y\times_B E \arrow[d] \arrow[r] & E \arrow[d]\\
+Y \arrow[r] & B
+\end{tikzcd}
+
+\subsection{Adjoints}
+The idea of two morphisms being adjoint arises everywhere in mathematics (i bet you hadn't heard that before). Let's see an example: consider the forgetful functor $U:\cat{Vect_k}\to\cat{Set}$ that sends a vector space $V$ to its underlying set $U(V)$, forgetting the structure, and the functor $F:\cat{Set}\to\cat{Vect_k}$ which constructs the free vector space from any set $S$. Instead of explicitly writing $F$, it is most convenient to consider a simple case and then state the universal property which makes the general idea of a \emph{free functor} useful.
+
+For a set $S=\{a,b,c\}$, we define the \emph{free monoid} $F(S)$ to be all strings of `words' from $S$, e.g. $abc\in F(S)$, $aaaaaa\in F(S)$, etc. with concatenation. Furthermore, for $F$ to be a functor we must make sure that functions $S\to S'$ are nicely mapped to monoid homomorphisms $F(S)\to F(S')$ ; ....??? Note that most monoids can be constructed from the free functor on some set, but that $F\circ U\neq 1$.
