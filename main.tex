@@ -15,15 +15,14 @@
 \usepackage{tikz-cd}
 \usepackage[
 	backend=biber,
-	bibencoding=utf8,
-	style=authoryear,
-	citestyle=apa
+	bibencoding=utf8
 ]{biblatex}
 
 % BIBLIO
 \addbibresource{biblio.bib}
 
 % MATH DEFINITIONS
+\setmathfont{XITS Math}
 \input{defs}
 
 % HELPERS
@@ -44,6 +43,9 @@
 \author{Pol Gómez Riquelme \\ \texttt{gomezp@uchicago.edu}}
 \date{June--August, 2017}
 \maketitle
+
+\input{preface}
+
 \tableofcontents
 \pagebreak
 

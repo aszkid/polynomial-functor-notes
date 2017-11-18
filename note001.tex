@@ -57,14 +57,14 @@ After a quick exposure to the basic concepts of category theory (spread through 
 (Note that by $X^{E_b}$ we mean the set of all functions $E_b\to X$, essentially equivalent to $E_b$-indexed subsets of $X$.)
 
 The following identifications are freely made, and easy to convince oneself of:
-\begin{proposition}[\cite{kock} 1.1.1]
+\begin{lemma}[\emph{Kock~1.1.1}]
 	For $p:E\to B$ and $X\in\cat{Set}$, the following hold:
 	\begin{itemize}
 		\item $\sum_{b\in B} E_{b} = E$,
 		\item $\sum_{b\in B} X = B\times X$,
 		\item $\prod_{e\in E} X = X^E$.
 		\end{itemize}
-\end{proposition}
+\end{lemma}
 
 
 \subsection{Slices and coslices}
@@ -143,7 +143,31 @@ More intuitively; the pullback is the `most general way' to complete a pair of m
 
 The characteristic function $p:E\to B$ of a polynomial functor induces a functor $p^*:(\catset\downarrow B)\to(\catset\downarrow E)$ sending maps $f:Y\to B$ to the pullback $Y\times_B E$.
 
-More concretely, $p^* Y = Y\times_B E = \sum_{e\in E} Y_{p(e)}$, where maps are implicit. The fibre over some $e\in E$ is of course given by $Y_{p(e)}$.
+More concretely, $p^* Y = Y\times_B E = \sum_{e\in E} Y_{p(e)}$ where maps are implicit. The fibre over some $e\in E$ is of course given by $Y_{p(e)}$. In more intuitive terms, this functor nicely organizes elements in $Y$ and $E$, with respect to fibres over $B$.
+
+
+\subsection{Adjoint functors}
+
+\begin{definition}[Adjoint, \emph{Leinster~2.1.1}]
+	Whenever we have two functors
+	\begin{tikzcd}
+		\calA \arrow[r,shift left,"F"] & \arrow[l,shift left,"G"] \calB
+	\end{tikzcd},
+	we say that $F$ is \emph{left-adjoint} to $G$ and write $F \dashv G$ if
+	\begin{align*}
+		\Hom_\calB(F(A),B) \cong \Hom_\calA(F,G(B))
+	\end{align*}
+	naturally in $A\in\calA$ and $B\in\calB$.
+\end{definition}
+
+By \emph{naturally}, we mean that our choice of isomorphism is done in the most `general way'. Concretely, given $g\in\Hom_\calB(F(A),B)$, we denote by $\overline{g}\in\Hom_\calA(A,G(B))$ the map induced by the isomorphism of $\Hom$-sets, and in the other direction, $f\in\Hom_\calA(A,G(B))$ gives $\overline{f}\in\Hom_\calB(F(A),B)$. (Note that $\overline{\overline{f}}=f$.) Naturality then says the following;
+\begin{align*}
+	\overline{\left(F(A) \overset{g}{\longrightarrow} B \overset{q}{\longrightarrow} B'\right)} = \left( A \overset{\overline{g}}{\longrightarrow} G(B) \overset{G(q)}{\longrightarrow} G(B') \right)
+\end{align*} ($\overline{q\circ g} = G(q)\circ\overline{g}$) for all $g$ and $q$, and
+\begin{align*}
+	\overline{\left( A' \overset{p}{\longrightarrow} A \overset{f}{\longrightarrow} G(B) \right)} = \left( F(A') \overset{F(p)}{\longrightarrow} F(A) \overset{\overline{f}}{\longrightarrow} B \right)
+\end{align*}
+for any $p$ and $q$.
 
 \subsection{$p_*$ -- adjoint functor}
 
