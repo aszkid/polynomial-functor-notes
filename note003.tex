@@ -1,0 +1,82 @@
+% !TEX root=main.tex
+
+\pagebreak
+
+\section{Note 3}
+
+\subsection{Characterization of symmetric functors}
+
+Given a symmetric functor $P$ defined by $I \overset{s}{\gets} E \overset{p}{\to} B$, it is reasonable to say that $P$ is \emph{symmetric} if given any $I$-permutation $\sigma:I\to I$, we have an isomorphic natural transformation $P \cong P\circ \sigma^*$.
+
+\subsection{When sometimes sets are not enough}
+
+We begin the study of symmetric functors by considering this very simple symmetric polynomial:
+\[
+P(X_1,X_2,X_3) = X_1X_2 + X_1X_3 + X_2X_3.
+\]
+
+Let $I \overset{s}{\gets} E \overset{p}{\to} B$ be sets and set-valued functions representing the above polynomial functor $P$. We might expect a nice combinatorial description of $E$, $B$ and their corresponding maps $s$ and $p$. The following picture gives a hint:
+
+(picture)
+
+In other words, $B$ is the set of all 2-element subsets of $I=\{1,2,3\}$, giving $\binom{3}{2}=3=|B|$ total monomials. To recover $E$, we essentially `repeat' these subsets with a chosen point, which denotes the labeling; $E$ is the the of pointed 2-element subsets of $I$. Summing up, we have
+
+\begin{align*}
+I &= \{1,2,3\}\\
+B &= \{\{1,2\},\{1,3\},\{2,3\}\}\\
+E &= \{\{\underline{1},2\}, \{1,\underline{2}\}, \{\underline{1},3\}, \{1,\underline{3}\},\{\underline{2},3\}, \{2,\underline{3}\}\}
+\end{align*}
+
+with maps $s:E\to I$ simply returning the chosen point, and $p:E\to B$ returning the original 2-subset.
+
+To see how $P$ is indeed symmetric, we fix a 3-permutation $\sigma\in\mathfrak{S}_3$ and (...)
+
+Now consider the following slightly more complicated symmetric polynomial:
+\[
+P(X_1,X_2,X_3) = X_1X_2 + X_1X_3 + X_2X_3 + X_1^2 + X_2^2 + X_3^2.
+\]
+
+We desire a similar combinatorial description; $B$ could be the set of all 2-subsets of $I=\{1,2,3\}$ with repetitions allowed, or rather, the set of all 2-tuples of $I$. This is the same thing as the set of all functions from $\underline{2}=\{1,2\}$ to $I$. But careful! Now we have \emph{too much} stuff; points $(1,2)$ and $(2,1)$ produce monomials $X_1X_2$ and $X_2X_1$, which we of course identify by commutativity. Thus, we need to equip $B$ with an equivalence relation that collapses these points.
+
+Let $B=\{\underline{2}\to I\}/\sim$, with $f\sim g$ if given any permutation $\sigma\in\mathfrak{S}_2$, the diagram
+
+\begin{figure}[!ht]
+\centering
+\begin{tikzcd}[row sep=tiny]
+\underline{2}  \arrow[dr,"f"] \arrow[dd,"\sigma"] & \\
+ & I\\
+\underline{2} \arrow[ur,"g"] &
+\end{tikzcd}
+\end{figure}
+
+commutes. Now we have $|B|=\binom{3+2-1}{2}=6$, which are exactly the terms of $P$. To recover $E$, we follow the same strategy; we copy $B$ choosing a point for every subset. In other words, we let $E=\{\underline{1}\to\underline{2}\to I\}$, but the need to remove repetitions arises again (we consider pairs $(\underline{1},2)$ and $(2,\underline{1})$ to be equivalent!), so it is a most reasonable choice to apply the quotient through the equivalence $\approx$, with pairs $(a,f)\approx(b,g)$ if for any 2-permutation $\sigma$, the diagram
+
+\begin{figure}[!ht]
+\centering
+\begin{tikzcd}[row sep=tiny]
+ & \underline{2} \arrow[dr,"f"] \arrow[dd,"\sigma"] & \\
+\underline{1} \arrow[ur,"a"] \arrow[dr,"b"] & & I\\
+ & \underline{2} \arrow[ur,"g"] &
+\end{tikzcd}
+\end{figure}
+
+commutes. Now the map $s:E\to I$ is defined by the evaluation $s(\underline{1}\overset{a}{\to}\underline{2}\overset{f}{\to} I) = f\circ a(1)$, and $p:E\to B$ simply returns $f$ and applies the equivalence relation $\sim$.
+
+This looks good, but let us check whether simple cardinality conditions on the fibres are satisfied by this setup. Taking $(1,2)$ as the representative of its equivalence class in $B/\sim$, we expect $|p\inv((1,2))|=2$; indeed, the fibre is $\{(\underline{1},2),(1,\underline{2})\}$. Then the polynomial functor evaluates at that term with $X_1X_2$, just as expected! Now take the fibre of $(1,1)$; we expect $|p\inv((1,1))|=2$, but notice what happens: the term $(\underline{1},1)$ gets identified with $(1,\underline{1})$, and so we end up with $|p\inv((1,1))|=1$, which leaves us with the monomial $X_1$ of degree one!
+
+It has everything to do with the action of $\mathfrak{S}_2$ on $E$ \emph{not being free}. Consider the pair $(1,1)$, and two \emph{distinct} endomorphisms $Id$ and $\sigma$ (actions of $\mathfrak{S}_2$), with $Id$ taking the each coordinate to itself, and $\sigma$ exchanging them. In set-theoretic terms, the morphisms $Id$ and $\sigma$ are identified, because their set-theoretic evaluation is the same, and set-valued functions do not preserve that much structure. If we enrich our framework and preserve the fact that $Id\neq\sigma$, we might be able to expect a map that takes this detail into account. Here enter groupoids.
+
+\subsubsection{Groupoids are sets all right -- but better}
+
+\begin{figure}[!ht]
+\centering
+\begin{tikzcd}[column sep=tiny]
+B =& (2,3) \arrow[rrrrrrrr,bend left,leftrightarrow,"\sigma"] \arrow[loop below,"Id"] & (1,3) \arrow[rrrrrr,bend left,leftrightarrow,"\sigma"] \arrow[loop below,"Id"] & (1,2) \arrow[rrrr,bend left,leftrightarrow,"\sigma"] \arrow[loop below,"Id"] & (1,1) \arrow[loop above,"\sigma"] \arrow[loop below,"Id"] & (2,2) \arrow[loop above,"\sigma"] \arrow[loop below,"Id"] & (3,3) \arrow[loop above,"\sigma"] \arrow[loop below,"Id"] & (2,1) \arrow[loop below,"Id"] & (3,1) \arrow[loop below,"Id"] & (3,2) \arrow[loop below,"Id"]
+\end{tikzcd}
+\end{figure}
+
+The above diagram is a graphical representation of the situation we face in our previous example. We have a set $B$ of functions $\underline{2}\to I$ neatly represented by ordered pairs, and the symmetric group $\mathfrak{S}_2=\{Id,\sigma\}$ acting on it by means of coordinate permutations. We need to take a `smarter' version of the usual quotient $B/\mathfrak{S}_2$, which preserves the difference between $Id$ and $\sigma$.
+
+Denote by $B//G$ the \emph{weak quotient}, as the category made up of points in $B$ and (iso)morphisms $a\to b$ whenever $ga=b$ for some $g\in G$. Connected components are isomorphic, and a quick argument shows that their automorphism groups are isomorphic too, up to a change in identity; it is reasonable then to treat these components as `objects' with `symmetries'.
+
+In the case above, with $B//\mathfrak{S}_2$, the outer pairs have trivial automorphism groups, but the symmetric pairs $(1,1), (2,2)$ and $(3,3)$ do not! In other words, we have a \emph{quasi}-equivalence relation, where the elements mentioned are equivalent to themselves \emph{in more than one way}. This is the detail that makes the action of the symmetry group into a non-free action, and messes up the cardinality of our fibres; what we really want is to make $E$ into a groupoid too, and find a nice \emph{functor} $E\to B//\mathfrak{S}_2$.

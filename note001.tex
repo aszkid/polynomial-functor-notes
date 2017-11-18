@@ -2,6 +2,44 @@
 
 \section{Note 1}
 
+\subsection{Product and coproduct}
+
+\begin{definition}[Product]
+	Given a category $\calC$ and objects $X_1,X_2\in\calC$, we say that $X_1\times X_2$ is the \emph{product} of these two sets if there exist morphisms $\pi_1:X_1\times X_2 \to X_1$ and $\pi_2:X_1\times X_2\to X_2$, usually referred to as `projections', satisfying the following universal property: for any pair of morphisms $f_1:Y\to X_1$ and $f_2:Y\to X_2$, there is a unique morphism $f:Y\to X_1\times X_2$ such that $f_1=\pi_1 \circ f$ and $f_2=\pi_2 \circ f$, i.e. the following diagram commutes;
+
+	\begin{figure}[!ht]
+	\centering
+	\begin{tikzcd}
+	& \arrow[dl,"f_1"'] Y \arrow[d,dashed,"f"] \arrow[dr,"f_2"] &\\
+	X_1 & \arrow[l,"\pi_1"] X_1\times X_2 \arrow[r,"\pi_2"'] & X_2
+	\end{tikzcd}
+	\end{figure}
+\end{definition}
+
+More intuitively, any pair of function $f_1,f_2$ into $X_1,X_2$ respectively factorize uniquely through the product; we can `naturally' pass through it, and then `project' back to our original codomain.
+
+For $\calC=\cat{Set}$, the product manifests as the \emph{cartesian product}, with projection on the coordinates.
+
+\begin{definition}[Coproduct]
+	Given a category $\calC$ and objects $X_1,X_2\in\calC$, we say that $X_1\coprod X_2$ is the \emph{coproduct} of these two sets if there exist morphisms $i_1:X_1\to X_1\coprod X_2$ and $i_2:X_2\to X_1\coprod X_2$, usually referred to as `inclusions', satisfying the following universal property: for any pair of morphisms $f_1:X_1\to Y$ and $f_2:X_2\to Y$, there is a unique morphism $f:X_1\coprod X_2\to Y$ such that $f_1=f\circ i_1$ and $f_2=f\circ i_2$, i.e. the following diagram commutes;
+
+	\begin{figure}[!ht]
+	\centering
+	\begin{tikzcd}
+	& Y &\\
+	X_1 \arrow[ur,"f_1"] \arrow[r,"i_1"'] & \arrow[u,dashed,"f"] X_1\coprod X_2 & \arrow[l,"i_2"] \arrow[ul,"f_2"'] X_2
+	\end{tikzcd}
+	\end{figure}
+\end{definition}
+
+This is of course the dual concept to that of the product; any pair of morphisms $f_1,f_2$ from $X_1,X_2$ respectively factorize uniquely through the coproduct; we can pass through it by means of inclusion, and then `naturally' end up in our original codomain.
+
+For $\calC=\cat{Set}$, the coproduct manifests as the \emph{disjoint union}, with inclusion by identification.
+
+Both concepts can be readily generalized to families of sets; we denote the categorical product by $\prod_{\alpha\in A} X_\alpha$ and the categorical coproduct by $\sum_{\alpha\in A} X_\alpha$.
+
+
+
 \subsection{First encounter with polynomial functors}
 
 After a quick exposure to the basic concepts of category theory (spread through a long year), we introduce the concept of a \emph{polynomial functor} as a categorification of the usual arithmetic polynomial. We start with the easy one-variable case:
@@ -9,12 +47,16 @@ After a quick exposure to the basic concepts of category theory (spread through 
 \begin{definition}
 	Given two sets $E,B$ and a function $p:E\to B$, we define the \emph{polynomial functor} $P:\cat{Set}\to\cat{Set}$ as follows:
     \begin{enumerate}
-    \item For $X\in\cat{Set}$, we have $X \mapsto \sum_{b\in B} X^{Eb}$
-    \item For $f:X\to Y$, we have $f(X) \mapsto \sum_{b\in B} f(X)^{Eb}$
+    \item For $X\in\cat{Set}$, we have $X \mapsto \sum_{b\in B} X^{E_b}$
+    \item For $f:X\to Y$, we have $f(X) \mapsto \sum_{b\in B} f(X)^{E_b}$
     \end{enumerate}
-    
-    with $Eb=p\inv\{b\}$ the fibre over $b$.
+
+    with $E_b=p\inv\{b\}$ the fibre over $b$.
 \end{definition}
+
+(Note that by $X^{E_b}$ we mean the set of all functions $E_b\to X$, essentially equivalent to $E_b$-indexed subsets of $X$.)
+
+
 
 \subsection{Slices and coslices}
 
@@ -32,10 +74,13 @@ We can achieve exactly that by making an \emph{indexing set} $I=\{1,2,3\}$ and s
 \item \emph{Morphisms:} functions $f:X\to Y$ such that the diagram
 \end{itemize}
 
+\begin{figure}[!ht]
+\centering
 \begin{tikzcd}
-X \arrow[dr,"\pi_X"] \arrow[rr,"f"] & & Y \arrow[dl,"\pi_Y"]\\
+X \arrow[dr,"\pi_X"'] \arrow[rr,"f"] & & Y \arrow[dl,"\pi_Y"]\\
 & I &
 \end{tikzcd}
+\end{figure}
 commutes.
 
 In more intuitive terms: we classify the elements in $X$ indexing them to $I$ in all possible ways, through `classifiers' $\pi_X$, and a map between two specific slices $(X,\pi_X)\to(Y,\pi_Y)$ only makes sense in the slice category if the indexing is preserved, by means of the commutative diagram. The elements of the slice category can be thought of as pairs $(X,\pi_X)$, but the function $\pi_X$ already encodes enough information.
@@ -46,21 +91,35 @@ And like most things in category theory, we have a dual concept to slices. Intui
 \item \emph{Morphisms:} functions $f:X\to Y$ such that the diagram
 \end{itemize}
 
+\begin{figure}[!ht]
+\centering
 \begin{tikzcd}
 & I \arrow[dl,"\pi_X"] \arrow[dr,"\pi_Y"] &\\
 X \arrow[rr,"f"] & & Y
 \end{tikzcd}
+\end{figure}
 commutes.
 
 (explain `specifier' intuition ...)
 
 \subsection{Pullbacks}
-The characteristic function $p:E\to B$ (in the sense that it defines our polynomial) induces a functor $p^*:(\catSet\downarrow B)\to(\catSet\downarrow E)$ sending maps $f:Y\to B$ to the pullback
+The categorical construction of the \emph{pullback} permeates thorough mathematics, and we use it widely. We define it here by its universal property, as is common in category theory.
 
+\begin{definition}[Pullback]
+
+\end{definition}
+
+More intuitively; the pullback is the `most general way' to complete a pair of morphisms into a commutative square.
+
+The characteristic function $p:E\to B$ (characteristic in the sense that it defines our polynomial) induces a functor $p^*:(\catset\downarrow B)\to(\catset\downarrow E)$ sending maps $f:Y\to B$ to the pullback
+
+\begin{figure}[!ht]
+\centering
 \begin{tikzcd}
 Y\times_B E \arrow[d] \arrow[r] & E \arrow[d]\\
 Y \arrow[r] & B
 \end{tikzcd}
+\end{figure}
 
 \subsection{Adjoints}
 The idea of two morphisms being adjoint arises everywhere in mathematics (i bet you hadn't heard that before). Let's see an example: consider the forgetful functor $U:\cat{Vect_k}\to\cat{Set}$ that sends a vector space $V$ to its underlying set $U(V)$, forgetting the structure, and the functor $F:\cat{Set}\to\cat{Vect_k}$ which constructs the free vector space from any set $S$. Instead of explicitly writing $F$, it is most convenient to consider a simple case and then state the universal property which makes the general idea of a \emph{free functor} useful.

@@ -1,0 +1,140 @@
+% !TEX root=main.tex
+
+\pagebreak
+
+\section{Note 4}
+
+\subsection{Elementary symmetric functors}
+
+Here we construct a purely combinatorial description of the usual elementary symmetric polynomials, extended to the functor version.
+
+\begin{exercise}
+The $k$-th elementary symmetric polynomial functor in $n$ variables $X_1,\dots,X_n$ is given by $I\overset{s}{\gets} E\overset{p}{\to} B$, with sets
+\begin{itemize}
+\item $I=\{1,2,\dots,n\}$,
+\item $B=\{k$-subsets of $I\} = \{[k] \to I\}$, and
+\item $E=\{$pointed $k$-subsets of $I\} = \{[1] \to [k] \to I\}$
+\end{itemize}
+and functions
+\begin{itemize}
+\item $s:E\to I$ returning the chosen point, and
+\item $p:E\to B$ sending a pointed $k$-subset to its unpointed version.
+\end{itemize}
+\end{exercise}
+\begin{solution}
+$e_k$ has $\binom{n}{k}$ terms, and $|B|=\binom{n}{k}$. Every monomial has $k$ distinct variables of degree one, and given any $b\in B$, we have that $p\inv(b)$ is a fibre with a total of $k$ pointed $k$-subsets of $I$, producing $k$ distinct variables of degree one. (... a bit more detail ...)
+
++ show symmetry in combinatorial way
+\end{solution}
+
+\begin{solution}
+% \emph{REAL SOLUTION.} Fix a permutation $\sigma:I\to I$. We define a natural isomorphism
+
+% \begin{figure}[!ht]
+% \centering
+% \begin{tikzcd}
+% \catset/I \arrow[r, bend left=50, "p_*s^*"{name=U, above}]
+% \arrow[r, bend right=50, "p_*s^*\sigma^*"'{name=D}]
+% & \catset/B
+% \arrow[Leftrightarrow, from=U, to=D,"\eta"].
+% \end{tikzcd}
+% \end{figure}
+
+%Given any $(X \overset{f}{\to} I)\in\catset/I$, we have to define a bijection $\eta_X:p_*s^*(X)\to p_*s^*\sigma^*(X)$; that is, a bijection of fibres over $B$. This is best worked out in terms of trees! We will care somehow about \emph{restoring} the action of our chosen permutation, so we involve $\sigma\inv$.
+
+Fix a permutation $\sigma:I\to I$, and let $P=p_*s^*$ be the original polynomial, and $Q=p_*s^*\sigma^*$ its permuted version.
+
+%Fix a $b\in B$, and consider $(P(X))_b=\prod_{e\in E_b} X_{s(e)}$; by virtue of $\sigma$ being a bijection, we can substitute $e$ by $\sigma(e)$. We get $\prod_{\sigma(e)\in E_b} X_{s(\sigma(e))}$...
+
+We claim that an isomorphism $\sigma:I\to I$ induces an isomorphism $\tau:B\to B$ such that $\sigma(s(E_b))=s(E_{\tau(b)})$. Recall that $b\in B$ is given by a function $[k]\overset{b}{\to} I$, and let $\tau(b)=[k]\overset{b}{\to} I\overset{\sigma}{\to} I$. Also, $E_b$ is the set of all functions of the form $[1]\overset{c}{\to}[k]\overset{b}{\to}I$. Therefore
+\begin{align*}
+	\sigma(s(E_b)) &= \sigma(s(\{[1]\overset{c}{\to}[k]\overset{b}{\to} I\}))\\
+    	&= \sigma(\{b\circ c(1)\})\\
+        &= \{\sigma\circ b\circ c(1)\}\\
+		&= \{\tau\circ c(1)\}\\
+        &= s(\{[1]\overset{c}{\to}[k]\overset{\tau}{\to} I\})\\
+        &= s(E_{\tau(b)}),
+\end{align*}
+as desired.
+
+Hence we have
+
+\begin{align*}
+p_*s^*\sigma^*(X) &= \sum_{b\in B}\prod_{e\in E_b} X_{\sigma(s(e))}\\
+    &\simeq \sum_{b\in B}\prod_{e\in E_{\tau(b)}} X_{s(e)}\\
+    &\simeq \sum_{b\in \tau(B)}\prod_{e\in E_b} X_{s(e)}\\
+    &\simeq \sum_{b\in B}\prod_{e\in E_b} X_{s(e)} = p_*s^*(X).
+\end{align*}
+
+For naturality, given any function $X\overset{g}{\to} Y$, we require $\eta_Y\circ P(g) = G(g)\circ \eta_X$ (...)
+\end{solution}
+
+So, the overview is as follows: first, we find that a permutation of the indexing set $I$ induces a well-behaved permutation of polynomial terms, that is, of $B$. We use these two isomorphisms $\sigma$ and $\tau$ to manipulate the explicit formula of $P'$ and retrieve the original form of $P$. Naturality presents no trouble.
+
+BNOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO!!!!!!!!!!! This was for the homogeneous ones, BUT IT DIDNT WORK WITH PURE SETS.... maybe we can save it once we delve into groupoids?
+
+\begin{proposition}
+The $k$-th elementary symmetric polynomial functor in $n$ variables $X_1,\dots,X_n$ is given by $I\overset{s}{\gets} E\overset{p}{\to} B$, with sets $I=\{1,2,\dots,n\}$, $B=\binom{I}{k}$, $E=\binom{I}{k'}$, maps $s:E\to I$ returning the pointed element and $p:E\to B$ forgetting the pointed element.
+\end{proposition}
+\begin{proof}
+Our claim is that $p_*s^*\sigma^* \simeq p_*s^*$ for any given permutation $\sigma:I\to I$.
+
+First note that for a given $b\in B$, we have $\sigma(s(E_b))=s(E_{\sigma(b)})$. Hence
+
+\begin{align*}
+	p_*s^*\sigma^*(X) &= \sum_{b\in B}\prod_{e\in E_b} X_{\sigma(s(e))}\\
+		&\simeq \sum_{b\in B}\prod_{e\in E_{\sigma(b)}} X_{s(e)}\\
+        &\simeq \sum_{b\in \sigma(B)}\prod_{e\in E_b} X_{s(e)} = p_*s^*(X).
+\end{align*}
+\end{proof}
+
+The proof above is quick and dirty; we would like to show the natural isomorphism $p_*s^*\sigma^* \simeq p_*s^*$ without explicitly dealing with sums and products, that is, on a wholly functorial level.
+
+To do that, we observe that the equality $\sigma(s(E_b))=s(E_{\sigma(b)})$ suggests an action on both $E$ and $B$ induced by the $I$-permutation $\sigma$.
+
+We abuse notation by considering $k$ and $n$ to be the sets $[k]=\{1,2,\dots,k\}$ and $[n]=\{1,2,\dots,n\}$ respectively, in the appropriate contexts. By letting $I=[n]$, recall that $B$ can be written as $B=\binom{[n]}{k}=\{k\mono n\}$ and $E$ as $E=\binom{[n]}{k'}=\{1\to k\mono n\}$. Notice that $E,B\subset Set/I$, so action of $\sigma$ on $E$ and $B$ can be written as an endofunctor $\sigma_+:Set/I\to Set/I$, given by
+\begin{align*}
+(X\to I) \overset{\sigma_+}{\mapsto} (X\to I\overset{\sigma}{\to}).
+\end{align*}
+
+\begin{figure}[!ht]
+\centering
+\begin{tikzcd}
+& I \arrow[d,"\sigma"] & \arrow[l,"s"'] E \arrow[d,"\sigma_+"] \arrow[r,"p"] & B \arrow[d,"\sigma_+"] \arrow[r,"t"] & 1\\
+X\arrow[r] & I & \arrow[l,"s"] E \arrow[r,"p"'] & B \arrow[ur,"t"']
+\end{tikzcd}
+\caption{Complete diagram representing the situation for symmetric polynomials.}\label{fig:sympol}
+\end{figure}
+
+It is crucial to work with the complete description of a polynomial functor; we have to include the final functor $t_!$ completing the diagram $I\overset{s}{\gets} E\overset{p}{\to} B\overset{t}{\to} 1$. While $t$ is indeed trivial, it plays an important role in our proof.
+
+\begin{lemma}\label{lemma:thelps}
+For any isomorphism $\tau:B\to B$ and symmetric polynomial functor $t_!p_*s^*$, there is a natural isomorphism of functors $Q=t_!\tau^*p_*s^* \simeq t_!p_*s^*=P$.
+\end{lemma}
+\begin{proof}
+It is trivially given by $P(X)\to 1 \simeq 1 \gets Q(Y)$.
+\end{proof}
+
+The whole proof can be recited out loud by chasing the diagram in Fig. \ref{fig:sympol} along the paths in each line.
+
+\begin{proof}
+Succinctly,
+\begin{align}
+Q = t_!p_*s^*\sigma^* &\simeq t_!p_*\sigma_+^*s^*\\
+	&\simeq t_!\sigma_+^*p_*s^*\\
+    &\simeq t_!p_*s^* = P.
+\end{align}
+
+The first isomorphism is given by commutativity of the leftmost pullback square. The next isomorphism is given by Beck-Chevalley, and the final one depends on our Lemma above.
+
+\end{proof}
+
+\subsection{Complete homogeneous symmetric polynomial functors}
+
+
+
+\subsection{Fundamental theorem}
+
+\begin{theorem}[Fundamental Theorem of Symmetric Polynomial Functors]
+Given a symmetric polynomial functor $P$ over a category $\mathcal{C}$ with products and sums,
+\end{theorem}
