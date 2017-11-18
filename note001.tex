@@ -177,13 +177,63 @@ Fixing $A\in\calA$, we have the identity morphism $F(A) \overset{1_\calB}{\longr
 
 Similarly, fixing $B\in\calB$, from the identity morphism $G(B) \overset{1_\calA}{\longrightarrow} G(B)$ we obtain by right-adjunction the morphism $FG(B) \overset{\epsilon_B}{\longrightarrow} B$, letting $A=G(B)$. This again gives the collection of \emph{counits} of our adjunction (with each $\epsilon_{(-)}$ being the adjoint of the identity morphism in $\calA$).
 
-We claim that $\eta : 1_\calB \to G\circ F$ and $\epsilon : F\circ G \to 1_\calA$ are natural transformations. This should be intuitive, from the fact that how we obtained each unit and counit had nothing to do with specific $A$'s and $B$'s or morphisms in the respective categories: we only used the assumption that an identity exists for each element, and that we can adjoin it in a natural way (and this `natural' detail is key).
+We claim that $\eta : 1_\calA \to G\circ F$ and $\epsilon : F\circ G \to 1_\calB$ are natural transformations. This should be intuitive, from the fact that how we obtained each unit and counit had nothing to do with specific $A$'s and $B$'s or morphisms in the respective categories: we only used the assumption that an identity exists for each element, and that we can adjoin it in a natural way (and this `natural' detail is key).
 
-\subsection{$p_*$ -- adjoint functor}
+\begin{lemma}[Triangle identities, \emph{Leinster 2.2.2}]
+	Given an adjunction $F \dashv G$ with unit $\eta$ and counit $\epsilon$, the triangles
+	\begin{center}
+	\begin{tikzcd}
+		F \arrow[r,"F\circ\eta"] \arrow[dr,"1_F"'] & FGF \arrow[d,"\epsilon\circ F"]\\
+		  & F
+	\end{tikzcd}
+	\quad
+	\begin{tikzcd}
+		G \arrow[r,"\eta\circ G"] \arrow[dr,"1_G"'] & GFG \arrow[d,"G\circ\epsilon"]\\
+		  & G
+	\end{tikzcd}
+	\end{center}
+	commute.
+\end{lemma}
+(Note that each arrow is a natural transformation, which play nicely with composition [\emph{Leinster, Remarks 1.3.24}].)
+\begin{proof}
+	First lets figure out where are these natural transformations coming from. We have the diagram
+	\begin{center}
+	\begin{tikzcd}
+		\calB \arrow[r,bend left,"1_\calB"{name=I}] \arrow[r,bend right,"F\circ G"'{name=C}] & \calB \arrow[r,"G"] & \calA,
+		\arrow[Rightarrow,from=C,to=I,"\epsilon"]
+	\end{tikzcd}
+	\end{center}
+	which by horizontal composition gives
+	\begin{center}
+	\begin{tikzcd}
+		\calB \arrow[r,bend left,"G"{name=G}] \arrow[r,bend right,"G\circ F\circ G"'{name=C}] & \calA
+		\arrow[Rightarrow,from=C,to=G,"G\circ\epsilon"]
+	\end{tikzcd},
+	\end{center}
+	with $G\circ\epsilon$ being the natural transformation we wanted.
 
-\subsection{$p_!$ -- ?? functor}
+	Similarly, the following diagram
+	\begin{center}
+	\begin{tikzcd}
+		\calA \arrow[r,bend left,"1_\calA"{name=I}] \arrow[r,bend right,"G\circ F"'{name=C}] & \calA \arrow[r,"F"] & \calB
+		\arrow[Rightarrow,from=I,to=C,"\eta"']
+	\end{tikzcd}
+	\end{center}
+	gives by horizontal composition
+	\begin{center}
+	\begin{tikzcd}
+		\calA \arrow[r,bend left,"F"{name=F}] \arrow[r,bend right,"F\circ G\circ F"'{name=C}] & \calB
+		\arrow[Rightarrow,from=F,to=C,"F\circ\eta"']
+	\end{tikzcd}.
+	\end{center}
 
-\subsection{Adjoints}
-The idea of two morphisms being adjoint arises everywhere in mathematics (i bet you hadn't heard that before). Let's see an example: consider the forgetful functor $U:\cat{Vect_k}\to\cat{Set}$ that sends a vector space $V$ to its underlying set $U(V)$, forgetting the structure, and the functor $F:\cat{Set}\to\cat{Vect_k}$ which constructs the free vector space from any set $S$. Instead of explicitly writing $F$, it is most convenient to consider a simple case and then state the universal property which makes the general idea of a \emph{free functor} useful.
+	All is left to check is that the triangles commute. We show this holds for this last triangle; the proof for the other one is dual. Fix $A\in\calA$, and consider the object $GF(A)$. By adjunction we get $\overline{1_{GF(A)}}=\epsilon_{F(A)}$, and by naturality we have
+	\begin{align*}
+		\overline{\left( A \overset{\eta_A}{\longrightarrow} GF(A) \overset{1_{GF(A)}}{\longrightarrow} GF(A) \right)} = F(A) \overset{F(\eta_A)}{\longrightarrow} FGF(A) \overset{\epsilon_{F(A)}}{\longrightarrow} FGF(A),
+	\end{align*}
+	but since the left-hand side simplifies to $\overline{\eta_A}=1_{F(A)}$, we get that $1_{F(A)}=\epsilon_{F(A)}\circ F(\eta_A)$ as desired.
+\end{proof}
 
-For a set $S=\{a,b,c\}$, we define the \emph{free monoid} $F(S)$ to be all strings of `words' from $S$, e.g. $abc\in F(S)$, $aaaaaa\in F(S)$, etc. with concatenation. Furthermore, for $F$ to be a functor we must make sure that functions $S\to S'$ are nicely mapped to monoid homomorphisms $F(S)\to F(S')$ ; ....??? Note that most monoids can be constructed from the free functor on some set, but that $F\circ U\neq 1$.
+\subsection{$p_*$ -- right adjoint}
+
+\subsection{$p_!$ -- left adjoint}
