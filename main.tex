@@ -13,7 +13,15 @@
 \setmainfont[Ligatures=TeX]{TeX Gyre Pagella}
 \usepackage{tikz}
 \usepackage{tikz-cd}
+\usepackage[
+	backend=biber,
+	bibencoding=utf8,
+	style=authoryear,
+	citestyle=apa
+]{biblatex}
 
+% BIBLIO
+\addbibresource{biblio.bib}
 
 % MATH DEFINITIONS
 \input{defs}
@@ -44,5 +52,8 @@
 \input{note002}
 \input{note003}
 \input{note004}
+
+\pagebreak
+\printbibliography
 
 \end{document}
