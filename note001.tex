@@ -169,6 +169,16 @@ By \emph{naturally}, we mean that our choice of isomorphism is done in the most 
 \end{align*}
 for any $p$ and $q$.
 
+For now, we care about two properties of adjoints, the first one empirical: (1) there is a good chance that a pair of opposing functors are adjoint, and (2) if a functor has a left-adjoint, it is unique up to isomorphism.
+
+
+\subsection{Adjoint functors through units and counits}
+Fixing $A\in\calA$, we have the identity morphism $F(A) \overset{1_\calB}{\longrightarrow} F(A)$, which by left-adjunction corresponds to a morphism $A \overset{\eta_A}{\longrightarrow} GF(A)$, letting $B=F(A)$ in the previous definition. This gives the collection of \emph{units} of our adjunction (note that each $\eta_{(-)}$ is the adjoint of the identity morphism in $\calB$).
+
+Similarly, fixing $B\in\calB$, from the identity morphism $G(B) \overset{1_\calA}{\longrightarrow} G(B)$ we obtain by right-adjunction the morphism $FG(B) \overset{\epsilon_B}{\longrightarrow} B$, letting $A=G(B)$. This again gives the collection of \emph{counits} of our adjunction (with each $\epsilon_{(-)}$ being the adjoint of the identity morphism in $\calA$).
+
+We claim that $\eta : 1_\calB \to G\circ F$ and $\epsilon : F\circ G \to 1_\calA$ are natural transformations. This should be intuitive, from the fact that how we obtained each unit and counit had nothing to do with specific $A$'s and $B$'s or morphisms in the respective categories: we only used the assumption that an identity exists for each element, and that we can adjoin it in a natural way (and this `natural' detail is key).
+
 \subsection{$p_*$ -- adjoint functor}
 
 \subsection{$p_!$ -- ?? functor}
