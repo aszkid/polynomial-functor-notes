@@ -94,7 +94,7 @@ And like most things in category theory, we have a dual concept to slices. Intui
 \begin{figure}[!ht]
 \centering
 \begin{tikzcd}
-& I \arrow[dl,"\pi_X"] \arrow[dr,"\pi_Y"] &\\
+& I \arrow[dl,"\pi_X"'] \arrow[dr,"\pi_Y"] &\\
 X \arrow[rr,"f"] & & Y
 \end{tikzcd}
 \end{figure}
@@ -106,12 +106,35 @@ commutes.
 The categorical construction of the \emph{pullback} permeates thorough mathematics, and we use it widely. We define it here by its universal property, as is common in category theory.
 
 \begin{definition}[Pullback]
+	Given a category $\calC$, an object $Z$ and morphisms $f:X\to Z$ and $g:Y\to Z$, we call $X\times_{Z} Y$ the \emph{pullback} (or \emph{fibre product}) of $f$ and $g$ if (1) the following diagram commutes;
+
+	\begin{figure}[!ht]
+	\centering
+	\begin{tikzcd}
+		X\times_Z Y \arrow[r,"p_2"] \arrow[d,"p_1"'] & Y \arrow[d,"g"]\\
+		X \arrow[r,"f"'] & Z
+	\end{tikzcd}
+	\end{figure}
+
+	and (2) any other such commuting diagram factors uniquely through $X\times_Z Y$. More concretely, if we have some object $Q$ and morphisms $q_1:Q\to X$ and $q_2:Q\to Y$ making the diagram commute, then there is a unique morphism $u:Q\to X\times_Z Y$ such that $q_1 = p_1\circ u$ and $q_2 = p_2\circ u$, i.e. the following diagram commutes;
+
+	\begin{figure}[!ht]
+	\centering
+	\begin{tikzcd}
+		Q \arrow[ddr,bend right,"q_1"'] \arrow[drr,bend left,"q_2"] \arrow[dr,dashed,"u"] & & \\
+		& X\times_Z Y \arrow[r,"p_2"] \arrow[d,"p_1"'] & Y \arrow[d,"g"]\\
+		& X \arrow[r,"f"'] & Z
+	\end{tikzcd}
+	\end{figure}
 
 \end{definition}
 
-More intuitively; the pullback is the `most general way' to complete a pair of morphisms into a commutative square.
+More intuitively; the pullback is the `most general way' to complete a pair of morphisms into a commutative square. In concrete, set-theoretical terms, the pullback organizes the agreeing fibres of two functions with equal codomain in the most efficient way possible.
 
-The characteristic function $p:E\to B$ (characteristic in the sense that it defines our polynomial) induces a functor $p^*:(\catset\downarrow B)\to(\catset\downarrow E)$ sending maps $f:Y\to B$ to the pullback
+
+\subsection{$p^*$ -- pullback functor}
+
+The characteristic function $p:E\to B$ of a polynomial functor induces a functor $p^*:(\catset\downarrow B)\to(\catset\downarrow E)$ sending maps $f:Y\to B$ to the pullback
 
 \begin{figure}[!ht]
 \centering
@@ -120,6 +143,10 @@ Y\times_B E \arrow[d] \arrow[r] & E \arrow[d]\\
 Y \arrow[r] & B
 \end{tikzcd}
 \end{figure}
+
+\subsection{$p_*$ -- adjoint functor}
+
+\subsection{$p_!$ -- ?? functor}
 
 \subsection{Adjoints}
 The idea of two morphisms being adjoint arises everywhere in mathematics (i bet you hadn't heard that before). Let's see an example: consider the forgetful functor $U:\cat{Vect_k}\to\cat{Set}$ that sends a vector space $V$ to its underlying set $U(V)$, forgetting the structure, and the functor $F:\cat{Set}\to\cat{Vect_k}$ which constructs the free vector space from any set $S$. Instead of explicitly writing $F$, it is most convenient to consider a simple case and then state the universal property which makes the general idea of a \emph{free functor} useful.
