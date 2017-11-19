@@ -4,6 +4,14 @@
 
 \subsection{Multivariate polynomials}
 
+Recall that from a map $\phi: E\to B$ arise three functors:
+\begin{center}
+\begin{tikzcd}
+  \catset/B \arrow[r,"\phi^*" description] & \arrow[l,bend left,"\phi_*"] \arrow[l,bend right,"\phi_!"'] \catset/E
+\end{tikzcd}
+\end{center}
+with $\phi_! \dashv \phi^* \dashv \phi_*$. These functors are sometimes referred to as $\Sigma_\phi = \phi_!$ (\emph{dependent sum}), $\Delta_\phi = \phi^*$ (\emph{pullback}) and $\Pi_\phi = \phi_*$. (\emph{dependent product}) We shall use the first convention.
+
 In its full generality, a polynomial functor $P:(\catset/I)\to(\catset/J)$ is described by a diagram of the form
 \begin{center}
 \begin{tikzcd}
@@ -13,7 +21,7 @@ In its full generality, a polynomial functor $P:(\catset/I)\to(\catset/J)$ is de
 \end{tikzcd}
 \end{center}
 
-and it is explicitly given by $P=t_!p_*s^*$. To see how this makes sense, we unpack the definition:
+and it is explicitly given by $P=t_!p_*s^*$ acting on any set $X$ over $I$. To see how this makes sense, we unpack the definition:
 \begin{align*}
   P(X) &= t_!p_*s^*\left( X_i \mid i\in I \right)\\
     &= t_!p_*\left( X_{s(e)} \mid e\in E \right)\\
@@ -43,5 +51,19 @@ The map $s$ projects the second element of each pair; the map $p$ projects the f
 \end{tabular}
 \end{table}
 
+
+
+\subsection{Beck-Chevalley and Distributivity}
+The \emph{Beck-Chevalley isomorphisms} prove to be a powerful tool to chase diagrams made up of combinations of the three functors we have defined. Given a pullback square
+\begin{center}
+\begin{tikzcd}
+  \cdot \arrow[dr, phantom, "\lrcorner", very near start] \arrow[r,"g"] \arrow[d,"u"'] & \cdot \arrow[d,"v"]\\
+  \cdot \arrow[r,"f"'] & \cdot
+\end{tikzcd}
+\end{center}
+the Beck-Chevalley isomorphisms read
+\begin{equation*}
+  g_!u^* \cong v^*f_! \quad \text{and} \quad g_*u^* \cong v^*f_*.
+\end{equation*}
 
 \pagebreak
