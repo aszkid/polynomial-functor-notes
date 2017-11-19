@@ -1,9 +1,27 @@
 % !TEX root=main.tex
 
-\section{Note 2}
+\section{Note 2 -- the polynomial functor}
 
 \subsection{Multivariate polynomials}
 
-We are ready to introduce polynomial functors in their fullest generality. Given a set-valued function $p:E\to B$, we define a few functors that, composed, will entirely characterize a polynomial functor. We want to multiple variables, and the standard strategy is to have an indexing function $E\to I$ so that each fibre $E_b$ is split into different labels.
+We are ready to introduce polynomial functors in their fullest generality. Given a set-valued function $p:E\to B$, we define a few functors that, composed, will entirely characterize a polynomial functor. We want to multiple variables, and the standard strategy is to have an indexing function $i:E\to I$ so that each fibre $E_b$ is split into different labels.
 
-To begin with, let $p^*:\slice{\catset}{I}$
+To begin with, let $p^*:\slice{\catset}{B}\to\slice{\catset}{E}$ be the pullback functor defined in our previous note. We also let $p_!:\slice{\catset}{E}\to\slice{\catset}{B}$ be the functor which sends maps $f:X\to E$ to the composite $p_!(f):X\overset{f}{\to} E\overset{p}{\to} B$.
+
+Our first task is to check that $p_!$ is left-adjoint to $p^*$; that is, for any $Y\overset{g}{\to} E\in\slice{\catset}{E}$ and $X\overset{f}{\to} B\in\slice{\catset}{B}$ there is a natural bijection
+\[
+	\hom_{\slice{\catset}{B}}(p_!g,f)\cong\hom_{\slice{\catset}{E}}(g,p^*f).
+\]
+
+\begin{proof}
+	$\Longleftarrow$ Given any map $g\overset{\phi}{\to} p^*f$, we have the following commuting diagram:
+
+    \begin{tikzcd}
+    Y \arrow[dr,"g"] \arrow[rr,"\phi"] & & E\times_B X \arrow[dl,"p^*f"]\\
+    & E &
+    \end{tikzcd}
+
+ 	which can be naturally extended into
+
+
+\end{proof}
