@@ -4,24 +4,44 @@
 
 \subsection{Multivariate polynomials}
 
-We are ready to introduce polynomial functors in their fullest generality. Given a set-valued function $p:E\to B$, we define a few functors that, composed, will entirely characterize a polynomial functor. We want to multiple variables, and the standard strategy is to have an indexing function $i:E\to I$ so that each fibre $E_b$ is split into different labels.
+In its full generality, a polynomial functor $P:(\catset/I)\to(\catset/J)$ is described by a diagram of the form
+\begin{center}
+\begin{tikzcd}
+    & E \arrow[dl,"s"'] \arrow[r,"p"] & B \arrow[dr,"t"] & \\
+  I &   &   & J\\
+    & X \arrow[ul,dashed] &   &
+\end{tikzcd}
+\end{center}
 
-To begin with, let $p^*:\slice{\catset}{B}\to\slice{\catset}{E}$ be the pullback functor defined in our previous note. We also let $p_!:\slice{\catset}{E}\to\slice{\catset}{B}$ be the functor which sends maps $f:X\to E$ to the composite $p_!(f):X\overset{f}{\to} E\overset{p}{\to} B$.
+and it is explicitly given by $P=t_!p_*s^*$. To see how this makes sense, we unpack the definition:
+\begin{align*}
+  P(X) &= t_!p_*s^*\left( X_i \mid i\in I \right)\\
+    &= t_!p_*\left( X_{s(e)} \mid e\in E \right)\\
+    &= t_!\left( \prod_{e\in E_b} X_{s(e)} \mid b\in B \right)\\
+    &= \left( \sum_{b\in B_j}\prod_{e\in E_b} X_{s(e)} \mid j\in J \right).
+\end{align*}
 
-Our first task is to check that $p_!$ is left-adjoint to $p^*$; that is, for any $Y\overset{g}{\to} E\in\slice{\catset}{E}$ and $X\overset{f}{\to} B\in\slice{\catset}{B}$ there is a natural bijection
+Note that we can coherently follow the chain of functors
 \[
-	\hom_{\slice{\catset}{B}}(p_!g,f)\cong\hom_{\slice{\catset}{E}}(g,p^*f).
+  \catset/I \overset{s^*}{\rightarrow} \catset/E \overset{p_*}{\rightarrow} \catset/B \overset{t_!}{\rightarrow} \catset/J
 \]
+by looking at each line in the expansion. First, we group fibres of $X$ over $s(e)$ to agree with $E$ in terms of the indexing set; then we multiply the fibres that get mapped to the same term in the polynomial, represented by each element in $B$; and finally we add all the terms together and produce the polynomials indexed by $J$.
 
-\begin{proof}
-	$\Longleftarrow$ Given any map $g\overset{\phi}{\to} p^*f$, we have the following commuting diagram:
+\subsection{Example}
 
-    \begin{tikzcd}
-    Y \arrow[dr,"g"] \arrow[rr,"\phi"] & & E\times_B X \arrow[dl,"p^*f"]\\
-    & E &
-    \end{tikzcd}
+An example might help clarify this abstract talk into more concrete terms. Consider the polynomial functor $X_1+X_1X_2 + X_1^2X_3$: this is a polynomial functor in three variables, so $I=\set{1,2,3}$; it has three terms, so $B=\set{a,b,c}$; it is made up of a total of six monomials, so $E=\set{(a,1), (b,1), (b,2), (c,1), (c,1)', (c,3)}$. In this case, $J=\set{\alpha}$ gives a single polynomial.
 
- 	which can be naturally extended into
+The map $s$ projects the second element of each pair; the map $p$ projects the first one; and $t$ sends everything to $\alpha$. See Table~\ref{table:polyrep} for a succint view.
+\begin{table}[]
+\centering
+\caption{Graphical representation of $X_1+X_1X_2+X_1^2X_3$. The left column is $I$, the center region is $E$, and the bottom row is $B$. `Accumulate' points vertically ($p$) or horizontally ($s$).}
+\begin{tabular}{c|ccc}\label{table:polyrep}
+1 & $\bullet$ & $\bullet$ & $\bullet\bullet$\\
+2 &   & $\bullet$ &   \\
+3 &   &   & $\bullet$ \\ \hline
+  & a  & b  & c
+\end{tabular}
+\end{table}
 
 
-\end{proof}
+\pagebreak
