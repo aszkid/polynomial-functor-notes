@@ -242,7 +242,7 @@ Given $p: E\to B$ and $X\overset{f}{\to} E$, we define the functor $p_! : (\cat{
 	p_!X = \sum_{b\in B} \sum_{e\in E_b} X_{e} = X.
 \end{align*}
 
-We are `rebuilding' the set, with fibres neatly organized; note that the fibre of $p_!X$ over a specific $b\in B$ is $\sum_{e\in E_b} X_e$. Note that $p_!X$ is a set over $B$ by post-composing with $p$, i.e. $p_!X = p \circ f$. Conceptually though, it is easier to describe it in terms of fibres.
+We are `rebuilding' the set, with fibres neatly organized; note that the fibre of $p_!X$ over a specific $b\in B$ is $\sum_{e\in E_b} X_e$. Note that $p_!X$ is a set over $B$ by post-composing with $p$, i.e. $p_!X = p \circ f$. It is important to have both (equivalent) definitions at hand.
 
 \begin{proposition}[\emph{Kock 8.2.3}]
 	$p_!$ is left adjoint to $p^*$.
@@ -266,11 +266,18 @@ We are `rebuilding' the set, with fibres neatly organized; note that the fibre o
 	\begin{center}
 	\begin{tikzcd}
 		X \arrow[dr,"v"] \arrow[ddr,bend right,"f"'] \arrow[drr,bend left,"u"] & &\\
-		  & Y\times_B E \arrow[d] \arrow[r] & Y \arrow[d]\\
+		  & E\times_B Y \arrow[d] \arrow[r] & Y \arrow[d]\\
 			& E \arrow[r,"p"'] & B
 	\end{tikzcd},
 	\end{center}
 	which is unique by the universal property of the pullback.
+\end{proof}
+
+\begin{lemma}[\emph{Kock 8.2.4}]
+	$p_!$ preserves pullbacks. More generally, $p_!$ preserves any limit whose shape is a diagram with a terminal object.
+\end{lemma}
+\begin{proof}
+	
 \end{proof}
 
 We now attempt to figure out an explicit description of the unit and counit for the $p_! \dashv p^*$ adjunction.
