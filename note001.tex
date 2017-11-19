@@ -1,6 +1,6 @@
 % !TEX root=main.tex
 
-\section{Note 1}
+\section{Note 1 -- preliminaries}
 
 \subsection{Product and coproduct}
 
@@ -174,7 +174,7 @@ for any $p$ and $q$.
 For now, we care about two properties of adjoints, the first one empirical: (1) there is a good chance that a pair of opposing functors are adjoint, and (2) if a functor has a left-adjoint, it is unique up to isomorphism.
 
 
-\subsection{Adjoint functors through units and counits}
+\subsubsection{Units and counits}
 Fixing $A\in\calA$, we have the identity morphism $F(A) \overset{1_\calB}{\longrightarrow} F(A)$, which by left-adjunction corresponds to a morphism $A \overset{\eta_A}{\longrightarrow} GF(A)$, letting $B=F(A)$ in the previous definition. This gives the collection of \emph{units} of our adjunction (note that each $\eta_{(-)}$ is the adjoint of the identity morphism in $\calB$).
 
 Similarly, fixing $B\in\calB$, from the identity morphism $G(B) \overset{1_\calA}{\longrightarrow} G(B)$ we obtain by right-adjunction the morphism $FG(B) \overset{\epsilon_B}{\longrightarrow} B$, letting $A=G(B)$. This again gives the collection of \emph{counits} of our adjunction (with each $\epsilon_{(-)}$ being the adjoint of the identity morphism in $\calA$).
@@ -271,5 +271,7 @@ We are `rebuilding' the set, with fibres neatly organized; note that the fibre o
 	\end{center}
 	which is unique by the universal property of the pullback. Hence we get a unique map in $\Hom_E(X,p^*Y)$. The process works exactly the same way in the opposite direction.
 \end{proof}
+
+We now attempt to figure out an explicit description of the unit and counit for the $p_! \dashv p^*$ adjunction.
 
 \pagebreak
