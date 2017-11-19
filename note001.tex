@@ -141,9 +141,11 @@ More intuitively; the pullback is the `most general way' to complete a pair of m
 
 \subsection{$p^*$ -- pullback functor}
 
-The characteristic function $p:E\to B$ of a polynomial functor induces a functor $p^*:(\catset\downarrow B)\to(\catset\downarrow E)$ sending maps $f:Y\to B$ to the pullback $Y\times_B E$.
+The characteristic function $p:E\to B$ of a polynomial functor induces a functor $p^*:(\catset\downarrow B)\to(\catset\downarrow E)$ sending maps $f:Y\to B$ to the pullback $E\times_B Y$.
 
-More concretely, $p^* Y = Y\times_B E = \sum_{e\in E} Y_{p(e)}$ where maps are implicit. The fibre over some $e\in E$ is of course given by $Y_{p(e)}$. In more intuitive terms, this functor nicely organizes elements in $Y$ and $E$, with respect to fibres over $B$.
+More concretely, $p^* Y = E\times_B Y = \sum_{e\in E} Y_{p(e)}$ where maps are implicit. The fibre over some $e\in E$ is of course given by $Y_{p(e)}$. In more intuitive terms, this functor nicely organizes elements in $Y$ and $E$, with respect to fibres over $B$.
+
+(From now on, we abuse notation by setting $\Hom_Q = \Hom_{\cat{Set}/Q}$.)
 
 
 \subsection{Adjoint functors}
@@ -234,6 +236,40 @@ We claim that $\eta : 1_\calA \to G\circ F$ and $\epsilon : F\circ G \to 1_\calB
 	but since the left-hand side simplifies to $\overline{\eta_A}=1_{F(A)}$, we get that $1_{F(A)}=\epsilon_{F(A)}\circ F(\eta_A)$ as desired.
 \end{proof}
 
-\subsection{$p_*$ -- right adjoint}
-
 \subsection{$p_!$ -- left adjoint}
+Given $p: E\to B$ and $X\overset{f}{\to} E$, we define the functor $p_! : (\cat{Set}/ E)\to(\cat{Set}/ B)$ by
+\begin{align*}
+	p_!X = \sum_{b\in B} \sum_{e\in E_b} X_{e} = X.
+\end{align*}
+
+We are `rebuilding' the set, with fibres neatly organized; note that the fibre of $p_!X$ over a specific $b\in B$ is $\sum_{e\in E_b} X_e$. Note that $p!X$ is a set over $B$ by post-composing with $p$, i.e. $p!X = p \circ f$. Conceptually though, it is easier to describe it in terms of fibres.
+
+\begin{proposition}[\emph{Kock 8.2.3}]
+	$p_!$ is left adjoint to $p^*$.
+\end{proposition}
+\begin{proof}
+	We show that $\Hom_B(p_!X,Y) \cong \Hom_E(X, p^*Y)$. Given the diagram
+	\begin{center}
+	\begin{tikzcd}
+		X \arrow[d] & Y \arrow[d]\\
+		E \arrow[r,"p"'] & B
+	\end{tikzcd},
+	\end{center}
+	to specify $f\in \Hom_B(p_!X,Y)$ is equivalent to completing the square
+	\begin{center}
+	\begin{tikzcd}
+		X \arrow[d] \arrow[r,"f"] & Y \arrow[d]\\
+		E \arrow[r,"p"'] & B
+	\end{tikzcd}
+	\end{center}
+	commutatively (this follows from our observation on the previous paragraph). Making this diagram commute is essentially giving a map $X\to E\times_B Y$ in the diagram
+	\begin{center}
+	\begin{tikzcd}
+		X \arrow[r] & Y\times_B E \arrow[d] \arrow[r] & Y \arrow[d]\\
+			& E \arrow[r,"p"'] & B
+	\end{tikzcd},
+	\end{center}
+	which is unique by the universal property of the pullback. Hence we get a unique map in $\Hom_E(X,p^*Y)$. The process works exactly the same way in the opposite direction.
+\end{proof}
+
+\pagebreak
