@@ -242,34 +242,35 @@ Given $p: E\to B$ and $X\overset{f}{\to} E$, we define the functor $p_! : (\cat{
 	p_!X = \sum_{b\in B} \sum_{e\in E_b} X_{e} = X.
 \end{align*}
 
-We are `rebuilding' the set, with fibres neatly organized; note that the fibre of $p_!X$ over a specific $b\in B$ is $\sum_{e\in E_b} X_e$. Note that $p!X$ is a set over $B$ by post-composing with $p$, i.e. $p!X = p \circ f$. Conceptually though, it is easier to describe it in terms of fibres.
+We are `rebuilding' the set, with fibres neatly organized; note that the fibre of $p_!X$ over a specific $b\in B$ is $\sum_{e\in E_b} X_e$. Note that $p_!X$ is a set over $B$ by post-composing with $p$, i.e. $p_!X = p \circ f$. Conceptually though, it is easier to describe it in terms of fibres.
 
 \begin{proposition}[\emph{Kock 8.2.3}]
 	$p_!$ is left adjoint to $p^*$.
 \end{proposition}
 \begin{proof}
-	We show that $\Hom_B(p_!X,Y) \cong \Hom_E(X, p^*Y)$. Given the diagram
+	We show that $\Hom_B(p_!X,Y) \cong \Hom_E(X, p^*Y)$. A morphism $u\in \Hom_B(p_!X,Y)$ makes the diagram
 	\begin{center}
 	\begin{tikzcd}
-		X \arrow[d] & Y \arrow[d]\\
-		E \arrow[r,"p"'] & B
+		X \arrow[rr,"u"] \arrow[dr,"p_!(f)"'] & & Y \arrow[dl]\\
+			& B &
 	\end{tikzcd},
 	\end{center}
-	to specify $f\in \Hom_B(p_!X,Y)$ is equivalent to completing the square
+	commute, which by definition of $p_!$ is expanded into
 	\begin{center}
 	\begin{tikzcd}
-		X \arrow[d] \arrow[r,"f"] & Y \arrow[d]\\
+		X \arrow[d,"f"'] \arrow[r,"u"] & Y \arrow[d]\\
 		E \arrow[r,"p"'] & B
 	\end{tikzcd}
 	\end{center}
-	commutatively (this follows from our observation on the previous paragraph). Making this diagram commute is essentially giving a map $X\to E\times_B Y$ in the diagram
+	(this follows from our observation on the previous paragraph). This is equivalent to giving a morphism $v\in\Hom_E(X,p^*Y)$ in the diagram
 	\begin{center}
 	\begin{tikzcd}
-		X \arrow[r] & Y\times_B E \arrow[d] \arrow[r] & Y \arrow[d]\\
+		X \arrow[dr,"v"] \arrow[ddr,bend right,"f"'] \arrow[drr,bend left,"u"] & &\\
+		  & Y\times_B E \arrow[d] \arrow[r] & Y \arrow[d]\\
 			& E \arrow[r,"p"'] & B
 	\end{tikzcd},
 	\end{center}
-	which is unique by the universal property of the pullback. Hence we get a unique map in $\Hom_E(X,p^*Y)$. The process works exactly the same way in the opposite direction.
+	which is unique by the universal property of the pullback.
 \end{proof}
 
 We now attempt to figure out an explicit description of the unit and counit for the $p_! \dashv p^*$ adjunction.
