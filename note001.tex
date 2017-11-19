@@ -141,9 +141,14 @@ More intuitively; the pullback is the `most general way' to complete a pair of m
 
 \subsection{$p^*$ -- pullback functor}
 
-The characteristic function $p:E\to B$ of a polynomial functor induces a functor $p^*:(\catset\downarrow B)\to(\catset\downarrow E)$ sending maps $f:Y\to B$ to the pullback $E\times_B Y$.
+The characteristic function $p:E\to B$ of a polynomial functor induces a functor $p^*:(\catset/ B)\to(\catset/ E)$ sending maps $f:Y\to B$ to the pullback $E\times_B Y$.
 
-More concretely, $p^* Y = E\times_B Y = \sum_{e\in E} Y_{p(e)}$ where maps are implicit. The fibre over some $e\in E$ is of course given by $Y_{p(e)}$. In more intuitive terms, this functor nicely organizes elements in $Y$ and $E$, with respect to fibres over $B$.
+More concretely,
+\begin{align*}
+	p^* \left( Y_b \mid b\in B \right) &= E\times_B Y\\
+		&= \sum_{e\in E} Y_{p(e)} = \left( Y_{p(e)} \mid e\in E \right)
+\end{align*}
+where maps are implicit. The fibre over some $e\in E$ is of course given by $Y_{p(e)}$. In more intuitive terms, this functor nicely organizes elements in $Y$ and $E$, with respect to fibres over $B$.
 
 (From now on, we abuse notation by setting $\Hom_Q = \Hom_{\cat{Set}/Q}$.)
 
@@ -239,16 +244,16 @@ We claim that $\eta : 1_\calA \to G\circ F$ and $\epsilon : F\circ G \to 1_\calB
 \subsection{$p_!$ -- left adjoint}
 Given $p: E\to B$ and $X\overset{f}{\to} E$, we define the functor $p_! : (\cat{Set}/ E)\to(\cat{Set}/ B)$ by
 \begin{align*}
-	p_!X = \sum_{b\in B} \sum_{e\in E_b} X_{e} = X.
+	p_!\left( X_e \mid e\in E \right) &= \left( \sum_{e\in E_b} X_e \mid b\in B \right) = X.
 \end{align*}
 
-We are `rebuilding' the set, with fibres neatly organized; note that the fibre of $p_!X$ over a specific $b\in B$ is $\sum_{e\in E_b} X_e$. Note that $p_!X$ is a set over $B$ by post-composing with $p$, i.e. $p_!X = p \circ f$. It is important to have both (equivalent) definitions at hand.
+Note that $p_!(X)$ is a set over $B$ by simply post-composing $X\overset{f}{\to} E\overset{p}{\to} B$. We are simply organizing the fibres over $B$ instead of $E$.
 
 \begin{proposition}[\emph{Kock 8.2.3}]
 	$p_!$ is left adjoint to $p^*$.
 \end{proposition}
 \begin{proof}
-	We show that $\Hom_B(p_!X,Y) \cong \Hom_E(X, p^*Y)$. A morphism $u\in \Hom_B(p_!X,Y)$ makes the diagram
+	A morphism $u\in \Hom_B(p_!X,Y)$ makes the diagram
 	\begin{center}
 	\begin{tikzcd}
 		X \arrow[rr,"u"] \arrow[dr,"p_!(f)"'] & & Y \arrow[dl]\\
@@ -273,13 +278,23 @@ We are `rebuilding' the set, with fibres neatly organized; note that the fibre o
 	which is unique by the universal property of the pullback.
 \end{proof}
 
-\begin{lemma}[\emph{Kock 8.2.4}]
-	$p_!$ preserves pullbacks. More generally, $p_!$ preserves any limit whose shape is a diagram with a terminal object.
-\end{lemma}
-\begin{proof}
-	
-\end{proof}
 
-We now attempt to figure out an explicit description of the unit and counit for the $p_! \dashv p^*$ adjunction.
+\subsubsection{Units and counits of $p_! \dashv p^*$}
+
+The unit $\eta_X : X \to p^*p_!X$ of the adjunction $p_! \dashv p^*$ at $f:X\to E$ is given by $\eta_X = \overline{1_X}$. Note that
+\begin{align*}
+	p^*p_!\left( X_e \mid e\in E \right) &= p^*\left( \sum_{e\in E_b} X_e \mid b\in B \right)\\
+		&= \left( \sum_{q\in E_{p(e)}} X_q \mid e\in E \right).
+\end{align*}
+
+We claim that the most natural way to define $\eta_X$ is by sending each $B$-fibre $X_e$ to the summand $X_q$ with $q=e$. More explicitly, we have $x \mapsto (f(x),x)$.
+
+The counit $\epsilon_Y : p_!p^*Y \to Y$ at $Y\to B$ can be understood by expanding the formulae for the fibre over any $b\in B$:
+\begin{align*}
+	(p_!p^*Y)_b &= \left( \sum_{e\in E_b} (p^*Y)_e \right)\\
+		&= \left( \sum_{e\in E_b} Y_{p(e)} \right)\\
+		&= \left( \sum_{e\in E_b} Y_b \right) = E_b \times Y_b,
+\end{align*}
+i.e. $p_!p^*\left(Y_b \mid b\in B \right) = \left( E_b\times Y_b \mid b\in B \right)$ and so the most natural way to define $\epsilon_Y$ is by simply projecting down $(e,y) \mapsto y$.
 
 \pagebreak
