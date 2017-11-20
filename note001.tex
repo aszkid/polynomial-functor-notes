@@ -335,5 +335,22 @@ commutes.
 \end{proof}
 
 \subsubsection{Unit and counit of $p^* \dashv p_*$}
+This time the unit of our adjunction is the family of morphisms $\eta_Y : Y \to p_*p^*Y$ for $g: Y\to B$. We have
+\begin{align*}
+	p_*p^*\left( Y_b \mid b\in B \right) &= p_*\left( Y_{p(e)} \mid e\in E \right)\\
+		&= \left( \prod_{e\in E_b} Y_{p(e)} \mid b\in B \right)\\
+		&= \left( \prod_{e\in E_b} Y_b \mid b\in B \right)\\
+		&= \left( Y_b^{E_b} \mid b\in B \right),
+\end{align*}
+
+and so the natural way to define $\eta_Y$ is by having $y\in Y_b$ mapped to the constant function $c : E_b\to Y_b$, i.e. $c(E_b)=\set{y}$.
+
+For the counit, the family of maps $\eta_X : p^*p_*X \to X$, we have
+\begin{align*}
+	p^*p_*\left( X_e \mid e\in E \right) &= p^*\left( \prod_{e\in E_b}X_e \mid b\in B \right)\\
+		&= \left( \prod_{q\in E_{p(e)}} X_q \mid e\in E\right) = E\times_B p_*X.
+\end{align*}
+
+Note that any pair $(e,s)\in E\times_B p_*X$ is an element $e\in E$ and a map $s:E_{p(e)}\to X$ making the triangle shown before commute. So the natural way to define $\eta_X$ is by sending $(e,s)$ to the evaluation $s(e)\in X$.
 
 \pagebreak
