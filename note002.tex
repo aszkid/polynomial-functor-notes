@@ -66,4 +66,31 @@ the Beck-Chevalley isomorphisms read
   g_!u^* \cong v^*f_! \quad \text{and} \quad g_*u^* \cong v^*f_*.
 \end{equation*}
 
+
+\subsection{How general is our theory?}
+
+Our construction of the polynomial functor of a diagram $I \overset{s}{\leftarrow} E \overset{p}{\rightarrow} B \overset{t}{\rightarrow} J$ living in some category $\calC$ works under some assumptions.
+
+\begin{definition}
+  A category $\calC$ is \emph{cartesian closed} if it has
+  \begin{enumerate}[(1)]
+    \setlength{\itemsep}{1pt}
+    \item a \emph{terminal object},
+    \item \emph{binary products} $X\times Y\in\calC$ for $X,Y\in\calC$, and
+    \item \emph{exponentials} $Z^Y\in\calC$ for $Y,Z\in\calC$.
+  \end{enumerate}
+\end{definition}
+
+The first two conditions of this definition are summed up by requiring that $\calC$ has all finite products, and the last one is equivalent to requiring the endofunctor $(-\times Y)$ to have a right adjoint for any $Y\in\calC$, usually denoted $(-)^Y$.
+
+\begin{definition}
+  A category $\calC$ is \emph{locally cartesian closed} if $\calC/X$ is cartesian closed for every $X\in\calC$.
+\end{definition}
+
+Recall that our construction of $p^*$ requires pullbacks; this is equivalent to requiring every slice of $\calC$ to have finite products (???!). Note that the left adjoint $p_!$ adds no restrictions (\emph{Kock, Lemma 8.2.17}). Finally, the right adjoint $p_*$ essentially asks for exponentiation ....??? The following proposition characterizes locally cartesian closed categories:
+
+\begin{theorem}[\emph{Barr-Wells, Theorem 13.4.3}]
+  A category $\calC$ is locally cartesian closed if and only if it has pullbacks and for each arrow $f:A\to B$, the pullback functor $f^*:\calC/B\to\calC/A$ has a right adjoint.
+\end{theorem}
+
 \pagebreak
