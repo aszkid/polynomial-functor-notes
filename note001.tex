@@ -179,10 +179,10 @@ for any $p$ and $q$.
 For now, we care about two properties of adjoints, the first one empirical: (1) there is a good chance that a pair of opposing functors are adjoint, and (2) if a functor has a left-adjoint, it is unique up to isomorphism.
 
 
-\subsubsection{Units and counits}
-Fixing $A\in\calA$, we have the identity morphism $F(A) \overset{1_\calB}{\longrightarrow} F(A)$, which by left-adjunction corresponds to a morphism $A \overset{\eta_A}{\longrightarrow} GF(A)$, letting $B=F(A)$ in the previous definition. This gives the collection of \emph{units} of our adjunction (note that each $\eta_{(-)}$ is the adjoint of the identity morphism in $\calB$).
+\subsubsection{Unit and counit}
+Fixing $A\in\calA$, we have the identity morphism $F(A) \overset{1_\calB}{\longrightarrow} F(A)$, which by left-adjunction corresponds to a morphism $A \overset{\eta_A}{\longrightarrow} GF(A)$, letting $B=F(A)$ in the previous definition. The collection $\set{\eta_A}_{A\in\calA}$ defines the \emph{unit} of our adjunction, denoted by $\eta$.
 
-Similarly, fixing $B\in\calB$, from the identity morphism $G(B) \overset{1_\calA}{\longrightarrow} G(B)$ we obtain by right-adjunction the morphism $FG(B) \overset{\epsilon_B}{\longrightarrow} B$, letting $A=G(B)$. This again gives the collection of \emph{counits} of our adjunction (with each $\epsilon_{(-)}$ being the adjoint of the identity morphism in $\calA$).
+Similarly, fixing $B\in\calB$, from the identity morphism $G(B) \overset{1_\calA}{\longrightarrow} G(B)$ we obtain by right-adjunction the morphism $FG(B) \overset{\epsilon_B}{\longrightarrow} B$, letting $A=G(B)$. Again, the collection $\set{\epsilon_B}_{B\in\calB}$ defines the \emph{counit} of our adjunction, denoted by $\epsilon$.
 
 We claim that $\eta : 1_\calA \to G\circ F$ and $\epsilon : F\circ G \to 1_\calB$ are natural transformations. This should be intuitive, from the fact that how we obtained each unit and counit had nothing to do with specific $A$'s and $B$'s or morphisms in the respective categories: we only used the assumption that an identity exists for each element, and that we can adjoin it in a natural way (and this `natural' detail is key).
 
@@ -279,7 +279,7 @@ Note that $p_!(X)$ is a set over $B$ by simply post-composing $X\overset{f}{\to}
 \end{proof}
 
 
-\subsubsection{Units and counits of $p_! \dashv p^*$}
+\subsubsection{Unit and counit of $p_! \dashv p^*$}
 
 We wish to write explicitly the unit $\eta_X : X \to p^*p_!X$ of the adjunction $p_! \dashv p^*$ at $f:X\to E$. Note that
 \begin{align*}
@@ -334,6 +334,6 @@ commutes.
 	Therefore $\Hom_E(p^*Y, X) \cong \Hom_B(Y,p_*X)$. The fact that we have used no specific structure of $X$ and $Y$ should be argument enough that this isomorphism is natural.
 \end{proof}
 
-\subsubsection{Units and counits of $p^* \dashv p_*$}
+\subsubsection{Unit and counit of $p^* \dashv p_*$}
 
 \pagebreak
