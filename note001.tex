@@ -281,20 +281,59 @@ Note that $p_!(X)$ is a set over $B$ by simply post-composing $X\overset{f}{\to}
 
 \subsubsection{Units and counits of $p_! \dashv p^*$}
 
-The unit $\eta_X : X \to p^*p_!X$ of the adjunction $p_! \dashv p^*$ at $f:X\to E$ is given by $\eta_X = \overline{1_X}$. Note that
+We wish to write explicitly the unit $\eta_X : X \to p^*p_!X$ of the adjunction $p_! \dashv p^*$ at $f:X\to E$. Note that
 \begin{align*}
-	p^*p_!\left( X_e \mid e\in E \right) &= p^*\left( \sum_{e\in E_b} X_e \mid b\in B \right)\\
-		&= \left( \sum_{q\in E_{p(e)}} X_q \mid e\in E \right).
+	(p^*p_!X)_e &= (p_!X)_{p(e)} = \left( \sum_{q\in E_{p(e)}} X_q \right),
 \end{align*}
 
-We claim that the most natural way to define $\eta_X$ is by sending each $B$-fibre $X_e$ to the summand $X_q$ with $q=e$. More explicitly, we have $x \mapsto (f(x),x)$.
+i.e. $p^*p_!\left( X_e \mid e\in E \right)= \left( \sum_{q\in E_{p(e)}} X_q \mid e\in E \right)$. The most natural way to define $\eta_X$ is by sending each $B$-fibre $X_e$ to the summand $X_q$ with $q=e$.
 
-The counit $\epsilon_Y : p_!p^*Y \to Y$ at $Y\to B$ can be understood by expanding the formulae for the fibre over any $b\in B$:
+The counit $\epsilon_Y : p_!p^*Y \to Y$ at $g:Y\to B$ can be similarly understood:
 \begin{align*}
 	(p_!p^*Y)_b &= \left( \sum_{e\in E_b} (p^*Y)_e \right)\\
 		&= \left( \sum_{e\in E_b} Y_{p(e)} \right)\\
 		&= \left( \sum_{e\in E_b} Y_b \right) = E_b \times Y_b,
 \end{align*}
 i.e. $p_!p^*\left(Y_b \mid b\in B \right) = \left( E_b\times Y_b \mid b\in B \right)$ and so the most natural way to define $\epsilon_Y$ is by simply projecting down $(e,y) \mapsto y$.
+
+
+\subsection{$p_*$ -- right adjoint}
+
+Any function $p:E\to B$ also induces a functor $p_*: (\catset/E)\to(\catset/B)$. Given $X\overset{f}{\to} E$, we define
+\begin{align*}
+	p_*\left( X_e \mid e\in E \right) = \left( \prod_{e\in E_b} X_{e} \mid b\in B \right).
+\end{align*}
+
+This functor is synonymous with `multiplying the fibres'. We use to it multiply the monomials in the same term.
+
+To specify an element in the fibre $(p_*X)_b$ is to give, for each $e\in E_b$, a subset $X_e\subset X$. In other words, it is equivalent to a collection of functions $\set{s:E_b\to X}\subset X^{E_b}$ such that the diagram
+\begin{center}
+\begin{tikzcd}
+	  & X \arrow[d] \\
+	E_b \arrow[ur,"s"] \arrow[r,"\subset" description] & E
+\end{tikzcd}
+\end{center}
+commutes.
+
+\begin{proposition}[\emph{Kock 8.2.10}]
+	$p_*$ is right adjoint to $p^*$.
+\end{proposition}
+\begin{proof}
+	Take any morhpism $u\in\Hom_E(p^*Y,X)$; this is equivalent to specifying, for each $e\in E$, a morphism $u_e: Y_{p(e)}\to X_e$. Hence
+	\begin{align*}
+		\Hom_E(p^*Y,X) &= \prod_{e\in E} X_e^{Y_{p(e)}}\\
+			&= \prod_{b\in B} \prod_{e\in E_b} X_e^{Y_b}.
+	\end{align*}
+
+	Now take a morphism $v\in\Hom_B(Y,p_*X)$; this is equivalent to specifying, for each $b\in B$, a morphism $v_b: Y_b \to \prod_{e\in E_b} X_e$. Hence
+	\begin{align*}
+		\Hom_B(Y,p_*X) &= \prod_{b\in B} \left( \prod_{e\in E_b} X_e \right)^{Y_b} &&\text{justify next line!}\\
+			&= \prod_{b\in B} \prod_{e\in E_b} X_e^{Y_b}.
+	\end{align*}
+
+	Therefore $\Hom_E(p^*Y, X) \cong \Hom_B(Y,p_*X)$. The fact that we have used no specific structure of $X$ and $Y$ should be argument enough that this isomorphism is natural.
+\end{proof}
+
+\subsubsection{Units and counits of $p^* \dashv p_*$}
 
 \pagebreak
